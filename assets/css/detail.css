@@ -1,0 +1,305 @@
+.anatomy-overview {
+    padding: 80px 0;
+    background: #f8fafc;
+    overflow: visible;
+}
+
+.anatomy-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1400px;
+    margin: auto;
+    align-items: flex-start;
+    position: relative;
+    top: -45px; /* 將整個左右佈局向上提 50px */
+}
+
+/* 左側 */
+.anatomy-sidebar {
+    width: 450px;
+    min-width: 450px;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.anatomy-inner {
+    padding: 5px;
+}
+
+.part-group {
+    margin-bottom: 18px;
+}
+
+.part-group:last-child {
+    margin-bottom: 0;
+}
+
+.part-group h4 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.part-group h4::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #ff708d;
+}
+
+.product-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product-item {
+    text-align: center;
+    cursor: pointer;
+    position: relative; /* 【關鍵】讓偽元素可以絕對定位 */
+    border-radius: 12px; /* 將圓角移到外層 */
+    overflow: hidden;    /* 隱藏超出的部分 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    transition: transform 0.4s ease;
+}
+.product-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0; /* 預設完全透明 */
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+.product-item.is-active img,
+.product-item:hover img {
+    box-shadow: 0 8px 25px rgba(255, 112, 141, 0.3);
+}
+
+.product-item span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b; /* 深藍灰色 */
+    
+    opacity: 0; /* 預設完全透明 */
+    transition: opacity 0.4s ease;
+    z-index: 2; /* 確保在濾鏡之上 */
+    width: 80%; /* 避免文字太長 */
+}
+
+/* 右側 */
+.anatomy-main {
+    flex-grow: 1;
+    min-height: 80vh;
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+.human-visual {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+}
+
+.anatomy-main.is-active .human-visual {
+    left: -25%;
+}
+
+.human-img {
+    max-width: 450px;
+    width: 100%;
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+.product-info-panel {
+    position: absolute;
+    top: 75%;
+    left: 100%;
+    top:40%;
+    width: 50%;
+    max-width: 450px;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 5;
+}
+
+.anatomy-main.is-active .product-info-panel {
+    left: 40%;
+    opacity: 1;
+}
+#info-image {
+    width: 100%;
+    height: 250px; /* 設定一個固定高度 */
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 25px; /* 與下方文字的間距 */
+}
+.product-info-panel h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.product-info-panel p {
+    font-size: 1.1rem;
+    color: #475569;
+    margin: 15px 0 25px 0;
+    line-height: 1.7;
+}
+
+/* 指標 */
+.pointers-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pointer {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.pointer.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#pointer-head {
+    top: 20%;
+    left: 49%;
+}
+
+#pointer-mouth {
+    top: 25%;
+    left: 49%;
+}
+
+#pointer-bone {
+    top: 40%;
+    left: 49%;
+}
+
+#pointer-knee {
+    top: 75%;
+    left: 46%;
+}
+
+.pointer-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ff708d;
+    position: relative;
+}
+
+.pointer-dot::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ff708d;
+    animation: pulse 1.5s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* 響應式 */
+@media (max-width: 991px) {
+    .anatomy-container {
+        flex-direction: column;
+    }
+
+    .anatomy-sidebar {
+        width: 100%;
+        order: 2;
+    }
+
+    .anatomy-main {
+        width: 100%;
+        order: 1;
+    }
+
+    .human-visual {
+        position: static;
+        margin-bottom: 40px;
+    }
+
+    .product-info-panel {
+        display: none;
+    }
+}
+
+.product-info-panel {
+    pointer-events: none;
+}
+
+.human-visual {
+    pointer-events: none;
+}
+.product-item:hover::before {
+    opacity: 0.85; /* 白色濾鏡浮現 */
+}
+
+.product-item:hover span {
+    opacity: 1; /* 文字浮現 */
+}
+
+.product-item:hover img {
+    transform: scale(1.1); /* 圖片稍微放大，增加動感 */
+}
+

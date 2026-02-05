@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PMEPH11T8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6PMEPH11T8');
+    </script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - Company Bootstrap Template</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/index.css" rel="stylesheet">
+    <link href="assets/css/card-production.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Company
+    * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
+    * Updated: Aug 07 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container position-relative d-flex align-items-center">
+            <a href="index.html" class="logo d-flex align-items-center me-auto">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <img src="assets/img/logo1.png" alt="">
+                <h1 class="sitename">澄乘科技</h1><span>.</span>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="pages/detail.html">product</a></li>
+                    <li><a href="pages/news.html">News</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <!--
+            <div class="header-social-links">
+                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+            -->
+        </div>
+    </header>
+
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section id="home" class="hero section dark-background">
+            <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                data-bs-interval="5000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div id="threejs-container-1" class="three-canvas-container"
+                            data-model="assets\img\3d-model\teeth2.glb"></div>
+                        <div class="overlay-text">
+                            <h2>精密牙科模型</h2>
+                            <p>客製化設計，完美契合</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div id="threejs-container-2" class="three-canvas-container"
+                            data-model="assets/img/3d-model/fox3.glb"></div>
+                        <div class="overlay-text">
+                            <h2>數位掃描技術</h2>
+                            <p>高精度還原細節</p>
+                        </div>
+                    </div>
+                    <!--<div class="carousel-item">
+                        <div id="threejs-container-2" class="three-canvas-container"></div>
+                    </div>
+                    <div class="carousel-item">
+                        <div id="threejs-container-3" class="three-canvas-container"></div>
+                    </div>-->
+                </div>
+                <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                </a>
+                <ol class="carousel-indicators"></ol>
+            </div>
+
+        </section>
+        <!-- About Section -->
+        <section id="cnc-machines" class="about section">
+
+            <div class="container">
+
+                <div class="row position-relative">
+
+                    <div class="col-lg-7 about-img" data-aos="zoom-out" data-aos-delay="200">
+                        <div class="about-slider-container">
+                            <div class="about-slider-track">
+                                <div class="about-slide active"><img src="assets/img/home/env02.jpg"></div>
+                                <div class="about-slide"><img src="assets/img/home/env01.jpg"></div>
+                                <div class="about-slide"><img src="assets/img/home/env03.jpg"></div>
+                            </div>
+
+                            <button class="about-nav-btn prev" id="about-prev">
+                                <svg fill="currentColor" width="800px" height="800px" viewBox="0 0 32 32"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M26.025 14.496l-14.286-.001 6.366-6.366L15.979 6 5.975 16.003 15.971 26l2.129-2.129-6.367-6.366h14.29z" />
+                                </svg>
+                            </button>
+                            <button class="about-nav-btn next" id="about-next">
+                                <svg fill="currentColor" width="800px" height="800px" viewBox="0 0 32 32"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.975 17.504l14.287.001-6.367 6.366L16.021 26l10.004-10.003L16.029 6l-2.128 2.129 6.367 6.366H5.977z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+                        <h2 class="inner-title">關於我們</h2>
+                        <div class="our-story">
+                            <h4>Est 2025</h4>
+                            <h3>Our Story</h3>
+                            <p>
+                                【值得信賴的夥伴】
+                                澄乘科技為2025年成立的新創公司，經營團隊主要由工研院spin-off，秉持著『創新、誠信、連結』經營理念，
+                                與台灣牙骨科臨床醫師，以及供應鏈廠商合作，共同追求高性能、多功能、客製化的高階醫材開發，以滿足更多臨
+                                床病患的需求，並打造台灣供應鏈，追求企業永續經營成長。
+                            </p>
+                            <p>
+                                【深耕技術與擴大服務】
+                                公司核心技術為客製化醫材設計與金屬列印製造服務，以3D列印技術為核心，以雷射積層製造骨科與牙科等金屬醫材
+                                ，結合大量跨領域知識，打造符合市場的製造服務與生產型態。
+                            </p>
+                            <p>
+                                【學習型的成長組織】
+                                重視每一位員工的學習，秉持著「創新、誠信、分享」的精神，打造適才適所的舞台，經營企業的目標是追求全體員
+                                工的幸福。在經營企業創造價值的過程學習與成長，讓經營者自身、企業員工，乃至所有的合作夥
+                                伴，都變得更為純潔美好。
+                            </p>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section><!-- /About Section -->
+
+        <!--specialized-->
+        <section class="wave-feature-section">
+            <!-- 背景海浪 (獨立圖層) -->
+            <div class="wave-bg-container">
+                <div class="wave-item wave-front"></div>
+                <div class="wave-item wave-back"></div>
+            </div>
+
+            <!-- 文字內容 (浮在海浪之上) -->
+            <div class="wave-feature-content">
+                <p class="top-tag">ADVANCED POWDER BED FUSION</p>
+                <h2>製造特色</h2>
+
+                <!-- 新增：三大核心特色 -->
+                <div class="features-row">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                        <span class="feature-num">01</span>
+                        <div class="feature-text">
+                            <h3>細緻粉末</h3>
+                            <p>Fine Powder</p>
+                        </div>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                        <span class="feature-num">02</span>
+                        <div class="feature-text">
+                            <h3>精準列印</h3>
+                            <p>Precision Print</p>
+                        </div>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="600">
+                        <span class="feature-num">03</span>
+                        <div class="feature-text">
+                            <h3>快速加工</h3>
+                            <p>Rapid Process</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="grid-full-section">
+            <div class="bubble-bg">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+            </div>
+            <div class="grid-full-container-a">
+                <div class="card-item-full item-1">
+                    <div class="card-photo-full gf1">
+
+                    </div>
+                    <div class="card-text-full">
+                        <h4>材料認證</h4>
+                        <p>Modern Architecture</p>
+                    </div>
+                </div>
+                <div class="card-item-full item-2">
+                    <div class="card-photo-full gf2"></div>
+                    <div class="card-text-full">
+                        <h4>設計開發</h4>
+                        <p>Minimalist Interior</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-full-container-b">
+                <div class="card-item-full item-3">
+                    <div class="card-photo-full gf3"></div>
+                    <div class="card-text-full">
+                        <h4>力學分析</h4>
+                        <p>Modern Architecture</p>
+                    </div>
+                </div>
+                <div class="card-item-full item-4">
+                    <div class="card-photo-full gf4"></div>
+                    <div class="card-text-full">
+                        <h4>製程模擬</h4>
+                        <p>Minimalist Interior</p>
+                    </div>
+                </div>
+                <div class="card-item-full item-5">
+                    <div class="card-photo-full gf5"></div>
+                    <div class="card-text-full">
+                        <h4>品質檢驗</h4>
+                        <p>Quality Assurance</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </section>
+
+        <!--production-->
+        <section class="new-slider-section">
+            <div class="minimal-header">
+                <div class="title-row">
+                    <span class="title-index">*</span>
+                    <h2 class="title-text">產品與服務</h2>
+                    <div class="title-line-divider"></div>
+                </div>
+                <p class="title-desc">PRODUCT & SERVRICE</p>
+            </div>
+            <div id="card-menu">
+                <div id="card-nav">
+                    <div id="card-prev">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </div>
+                    <div id="card-next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <ul id="cards">
+                    <li id="box1" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">金屬支架</h4>
+                            <p class="card-description">cobalt-chromium Framework</p>
+                            <p class="card-description">金屬支架是活動部分義齒的骨架結構，旨在提供穩定性、固位力和功能性，讓患者能舒適有效地使用假牙。</p>
+                        </div>
+                    </li>
+                    <li id="box2" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">骨板</h4>
+                            <p class="card-description">Bone Plate</p>
+                            <p class="card-description">主要作用是作為內部固定器，利用螺釘將骨板固定在骨頭表面或內部，以穩定骨折、矯正截骨或骨骼重建後的骨段。</p>
+                        </div>
+                    </li>
+                    <li id="box3" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">三明治假牙</h4>
+                            <p class="card-description">Denture</p>
+                            <p class="card-description">由樹脂製成的牙齦藉由金屬連接體與人工假牙結合。</p>
+                        </div>
+                    </li>
+                    <li id="box4" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">椎間融合器</h4>
+                            <p class="card-description">Cage</p>
+                            <p class="card-description">取代病變的椎間盤，在相鄰的兩個椎體之間提供穩定的支，有利於骨骼生長與融合。</p>
+                        </div>
+                    </li>
+                    <li id="box5" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">人工關節</h4>
+                            <p class="card-description">Artificial Joints</p>
+                            <p class="card-description">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
+                        </div>
+                    </li>
+                    <li id="box6" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">植體連桿</h4>
+                            <p class="card-description">Implant bar</p>
+                            <p class="card-description">牙根由鈦金屬精準加工，搭配由鈷鉻、鈦、二氧化鋯製成的牙冠，加速骨整合，大幅提升植牙成功率與長期穩定性。</p>
+                        </div>
+                    </li>
+                    <li id="box7" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">鈦網</h4>
+                            <p class="card-description">Ti Mesh</p>
+                            <p class="card-description">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
+                        </div>
+                    </li>
+                    <li id="box8" class="card-list">
+                        <div class="card-intro">
+                            <h4 class="card-title">口顎彌補物</h4>
+                            <p class="card-description"> Oral and Maxillofacial Prosthesis</p>
+                            <p class="card-description">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="minimal-header">
+                <div class="title-row">
+                    <div class="title-line-divider"></div>
+                </div>
+            </div>
+        </section>
+
+        <!--new flow section-->
+        <section id="road-scroll-section" class="section road-scroll-section">
+            <!-- 1. 滾動軌道 (決定動畫持續時間) -->
+            <div class="road-sticky-track">
+                <div class="parallax-mountains"></div>
+                <div class="road-stage">
+
+                    <!-- 3D 道路 -->
+                    <div class="road">
+                        <div class="depth"></div>
+                    </div>
+
+                    <!-- 車子  -->
+                    <div id="road-car" class="road-car">
+                        <img src="assets/img/cart.png" alt="Car">
+                    </div>
+
+                    <div id="road-car-title">
+                        訂單流程
+                    </div>
+                    <div id="road-car-title-p">
+                        WORKFLOW-INFO
+                    </div>
+                    <!-- 文字 -->
+                    <div class="road-text-container">
+                        <div id="road-text-group-1" class="road-text-group">
+                            <img src="assets/img/deliver/s1.png">
+                            <p>訂單確認</p>
+                        </div>
+                        <div id="road-text-group-2" class="road-text-group">
+                            <img src="assets/img/deliver/s2.png">
+                            <p>上傳檔案</p>
+                        </div>
+                        <div id="road-text-group-3" class="road-text-group">
+                            <img src="assets/img/deliver/s3.png">
+                            <p>設計開發與確認</p>
+                        </div>
+                        <div id="road-text-group-4" class="road-text-group">
+                            <img src="assets/img/deliver/s4.png">
+                            <p>產品製作</p>
+                        </div>
+                        <div id="road-text-group-5" class="road-text-group">
+                            <img src="assets/img/deliver/s5.png">
+                            <p>安全運送</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--new flow section-->
+        <section>
+            <div class="spon-row">
+                <div class="spon-line-divider"></div>
+                <h2 class="spon-title">合作夥伴</h2>
+                <div class="spon-line-divider"></div>
+            </div>
+            <div class="spon-carousel">
+                <div class="group">
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                </div>
+                <div aria-hidden class="group">
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                    <div class="spon-card"></div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+
+        <div class="container footer-top">
+            <div class="row gy-4">
+
+                <div class="col-lg-6 col-md-6 footer-about">
+                    <div class="info">
+                        <a href="index.html" class="logo d-flex align-items-center">
+                            <span class="sitename">澄乘科技</span>
+                        </a>
+                    </div>
+
+                    <div class="contact-group d-flex flex-wrap">
+
+                        <div class="footer-contact pt-3 info address-info">
+                            <p>高雄市路竹區</p>
+                            <p>路科二路69號1樓</p>
+                        </div>
+
+                        <div class="info phone-email-info">
+                            <p><strong>Phone:</strong> <span>07-6955658</span></p>
+                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 footer-visitor-count text-center">
+                    <h4 class="h5">累計網站訪問人數</h4>
+
+                    <img src="https://api.visitorbadge.io/api/visitors?path=yichen012%2FVisualWeb&label=瀏覽人數&labelColor=233E7C&countColor=D09088&style=flat"
+                        alt="網站累計訪問人數" title="本網站的總訪問次數">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container copyright text-center">
+            <p>
+                © <span>Copyright</span> <strong class="px-1 sitename">Lucid</strong> <span>All Rights Reserved</span>
+            </p>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/3d.js"></script>
+    <script type="module" src="assets/js/grass.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/card-slide.js"></script>
+
+</body>
+
+</html>

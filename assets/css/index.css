@@ -1,0 +1,654 @@
+/*three*/
+#home.hero,
+#hero-carousel,
+.carousel-inner,
+.carousel-item {
+    height: 80vh;
+    min-height: 500px;
+    background-color: #ffffff;
+}
+
+.three-canvas-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    background-color: #f8fafc;
+    background-image:
+        radial-gradient(#cbd8eb 1.2px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    transform: translateY(-50%);
+    width: 100%;
+    max-width: 460px;
+    z-index: 10;
+    pointer-events: none;
+    text-align: left;
+}
+
+/* 數據引導線裝飾 */
+.overlay-text::before {
+    content: 'DATA_STRUC_01';
+    font-family: monospace;
+    font-size: 10px;
+    color: #ff708d;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.overlay-text h2 {
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: #1a2533;
+    margin: 0;
+    line-height: 0.9;
+    text-transform: uppercase;
+
+    -webkit-text-stroke: 1px #1a2533;
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: boldFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.overlay-text p {
+    font-size: 1.1rem;
+    margin-top: 25px;
+    background: #ff708d;
+    color: white;
+    display: inline-block;
+    padding: 5px 15px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes boldFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .overlay-text {
+        right: 5%;
+        max-width: 380px;
+    }
+    .overlay-text h2 {
+        font-size: 3.2rem;
+    }
+}
+
+@media (max-width: 1830px) {
+    /* 1. 調整展示區高度，手機版不需要那麼高 */
+    #home.hero,
+    #hero-carousel,
+    .carousel-inner,
+    .carousel-item {
+        height: 60vh;
+        min-height: 400px;
+    }
+
+    .overlay-text {
+        top: 70%;
+        right: 3%;
+        max-width: 380px;
+    }
+
+    .overlay-text h2 {
+        font-size: 2.8rem; /* 標題明顯縮小 */
+        -webkit-text-stroke: 0.5px #1a2533;
+    }
+
+    .overlay-text p {
+        font-size: 0.95rem;
+        margin-top: 15px;
+    }
+}
+@media (max-width: 768px) {
+    #home.hero {
+        margin-bottom: 50px; /* 你可以根據需求調整這個數值，數字越大空隙越大 */
+    }
+    .overlay-text {
+        top: 75%;
+        right: 5%;
+        max-width: 280px;
+    }
+    .overlay-text h2 {
+        font-size: 1.8rem;
+    }
+    #home.hero,
+    #hero-carousel,
+    .carousel-inner,
+    .carousel-item {
+        height: 75vh !important;
+        min-height: 650px ;
+        background-color: #f8fafc; 
+    }
+
+    /* 2. 讓點點背景容器填滿這個高度 */
+    .three-canvas-container {
+        height: 100% ;
+        background-color: #f8fafc;
+        background-image: radial-gradient(#cbd8eb 1.2px, transparent 1px);
+        background-size: 40px 40px;
+    }
+    
+}
+/* 針對超小螢幕 (iPhone SE 等) */
+@media (max-width: 480px) {
+    .overlay-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    #home.hero, #hero-carousel {
+        height: 50vh;
+        min-height: 350px;
+    }
+    .overlay-text {
+        top: 75%;
+    }
+    .three-canvas-container {
+        height: auto;
+        }
+}
+
+/*powder*/
+.wave-feature-section {
+    position: relative;
+    width: 100%;
+    height: 750px;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+  background-color: #fff;
+}
+
+.wave-feature-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    transform: translateY(-40%);
+}
+
+.wave-feature-content h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #1a2533;
+    letter-spacing: -2px;
+    margin: 0 0 220px 0;
+    text-transform: uppercase;
+}
+
+.top-tag {
+    font-size: 0.9rem;
+    color: #ff708d;
+    letter-spacing: 0.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.features-row {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.feature-num {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ff708d;
+    margin-right: 12px;
+    margin-top: 4px;
+    position: relative;
+}
+
+.feature-num::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff708d;
+}
+
+.feature-text h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a2533;
+    margin: 0;
+}
+
+.feature-text p {
+    font-size: 0.85rem;
+    color: #7b8a97;
+    letter-spacing: 0.1em;
+    margin: 2px 0 0 0;
+    text-transform: uppercase;
+}
+
+.wave-bg-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 280px;
+    z-index: 1;
+}
+
+.wave-item {
+    background: url("../img/m-powder.svg") repeat-x;
+    position: absolute;
+    width: 6400px;
+    height: 100%;
+    background-position: bottom center;
+    background-size: 1600px 100%;
+    filter: grayscale(100%) brightness(0.8) contrast(1.1);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+}
+
+.wave-front {
+    animation: wave-flow 18s linear infinite;
+    z-index: 3;
+}
+
+.wave-back {
+    animation: wave-flow 30s linear infinite reverse;
+    opacity: 0.05;
+    bottom: 15px;
+    z-index: 2;
+}
+
+@keyframes wave-flow {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-1600px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wave-feature-section {
+        height: auto !important;
+        min-height: 700px;
+        padding-bottom: 120px;
+    }
+
+    .wave-feature-content {
+        transform: translateY(0) !important;
+        padding: 0 15px;
+    }
+
+    .wave-feature-content h2 {
+        font-size: 2.2rem ; 
+        margin-bottom: 40px;
+        letter-spacing: 2px;
+        white-space: normal ;
+    }
+
+    .features-row {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+        margin-top: 20px !important;
+    }
+
+    .feature-item {
+        width: 100%;
+        max-width: 250px;
+        justify-content: flex-start;
+    }
+
+    .wave-bg-container {
+        height: 200px !important;
+    }
+
+    .top-tag {
+        font-size: 0.75rem !important;
+        letter-spacing: 0.2em !important;
+    }
+}
+
+/*new-flow-chart*/
+.perspective-road-section {
+    width: 100%;
+    padding: 0;
+    background-image: linear-gradient(120deg, #f8fafc 0%, #eef2f3 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.sticky-track {
+    position: relative;
+    height: 250vh;
+}
+
+.perspective-road-section .road-wrapper {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    min-height: 500px;
+}
+
+.perspective-road-section .road {
+    width: 90vw;
+    height: 150px;
+    transform-style: preserve-3d;
+    transform-origin: bottom;
+    transform: perspective(500px) rotateX(60deg);
+    box-shadow: 0 0 30px 0 inset rgba(0, 0, 0, .7),
+        1px 40px 5px 5px rgba(0, 0, 0, .3);
+    background: #333;
+    position: relative;
+}
+
+.perspective-road-section .road::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(50% - 8px);
+    left: 5%;
+    width: 90%;
+    height: 16px;
+    background-image: linear-gradient(to right, #FFF 0%, #FFF 70%, #333 70%, #333 100%);
+    background-size: 60px 100%;
+    /*animation: animate-road linear .6s infinite;*/
+}
+
+@keyframes animate-road {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: 120px;
+    }
+}
+
+/*道路*/
+
+.road-scroll-section {
+    padding: 10;
+}
+
+.road-sticky-track {
+    position: relative;
+    height: 270vh;
+}
+
+.road-stage {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    perspective: 800px;
+    overflow: hidden;
+}
+
+.road {
+    position: absolute;
+    width: 120vw;
+    max-width: 1500px;
+    height: 150px;
+    transform: rotateX(55deg);
+
+    transform-style: preserve-3d;
+    background: #333;
+
+    box-shadow: 0 0 30px 0 inset rgba(0, 0, 0, 0.7),
+        1px 25px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.road::after {
+    content: '';
+    display: flex;
+    position: absolute;
+    top: calc((100% - 16px) / 2);
+    left: 5%;
+    width: 90%;
+    height: 16px;
+    background-image: linear-gradient(to right, #FFF 0%, #FFF 70%, #333 70%, #333 100%);
+    background-size: 60px 100%;
+}
+
+.road-car {
+    position: absolute;
+    width: 300px;
+    bottom: 30px;
+    left: -300px;
+    z-index: 5;
+    transform: rotateX(-5deg) translateZ(50px);
+}
+
+.road-stage.is-visible .road-car {
+    left: calc(50% - 75px);
+}
+
+.road-car img {
+    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.1));
+    width: 150%;
+}
+
+
+.depth {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #121212 90%, transparent);
+}
+#road-car-title{
+    position: absolute;
+    top: 10%;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color:#1a2533;
+    font-family: "Raleway", sans-serif;
+}
+
+#road-car-title-p{
+    position: absolute;
+    top: 15%;
+    font-size: 1.2rem;
+    color:#ff708d;
+    letter-spacing: 0.2em;
+}
+.road-text-container {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    width: 90%;
+    z-index: 6;
+}
+.road-text-group {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px); /* 預設往下一點 */
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.road-text-group.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.road-stage.is-visible .road-text-container {
+    opacity: 1;
+    transform: translate(-50%, -150%) translateY(0);
+}
+.road-text-container img{
+    max-width: 200px;
+}
+
+.road-text-group h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    
+    background: linear-gradient(45deg, #ff708d 30%, #4a90e2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.road-text-group p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 200px;
+}
+.road-text.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.parallax-mountains {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  /* 這次我們用漸層色，讓它更有 PPT 的層次感 */
+  background: radial-gradient(circle, rgba(235, 245, 255, 0.8) 0%, transparent 70%);
+  top: -40%;
+  left: -20%;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* 不規則曲線 */
+  animation: wave 20s infinite linear; /* 讓它有一點點緩慢的蠕動感 */
+}
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+@media (max-width: 1400px) {
+    .road-text-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px 60px;
+        width: 95%;
+        transform: translateX(-50%);
+    }
+
+    .road-text-container img {
+        max-width: 180px;
+        height: auto;
+    }
+}
+
+@media (max-width: 1100px) {
+    .road-stage {
+        height: 95vh;
+        align-items: flex-end;
+    }
+    .road-text-container img {
+        max-width: 160px;
+        height: auto;
+    }
+}
+
+@media (max-width: 650px) {
+    .road-text-container img {
+        max-width: 120px;
+        height: auto;
+    }
+}
+@media (max-width: 495px) {
+    .road-text-container img {
+        max-width: 100px;
+        height: auto;
+    }
+}
+
+@media (max-width: 430px) {
+    .road-text-container {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 100vw;
+        height: 260px; /* 一定要有高度 */
+        z-index: 10;
+    }
+
+    .road-text-group {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition: opacity 0.6s ease;
+    }
+
+    .road-text-group.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .road-text-container img {
+        max-width: 130px;
+    }
+
+    .road-text-group p {
+        font-size: 1.1rem;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
