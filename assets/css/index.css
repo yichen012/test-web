@@ -100,7 +100,6 @@
 }
 
 @media (max-width: 1830px) {
-    /* 1. 調整展示區高度，手機版不需要那麼高 */
     #home.hero,
     #hero-carousel,
     .carousel-inner,
@@ -116,7 +115,7 @@
     }
 
     .overlay-text h2 {
-        font-size: 2.8rem; /* 標題明顯縮小 */
+        font-size: 2.8rem; 
         -webkit-text-stroke: 0.5px #1a2533;
     }
 
@@ -127,7 +126,7 @@
 }
 @media (max-width: 768px) {
     #home.hero {
-        margin-bottom: 50px; /* 你可以根據需求調整這個數值，數字越大空隙越大 */
+        margin-bottom: 50px;
     }
     .overlay-text {
         top: 75%;
@@ -556,12 +555,11 @@
   position: absolute;
   width: 120%;
   height: 120%;
-  /* 這次我們用漸層色，讓它更有 PPT 的層次感 */
   background: radial-gradient(circle, rgba(235, 245, 255, 0.8) 0%, transparent 70%);
   top: -40%;
   left: -20%;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* 不規則曲線 */
-  animation: wave 20s infinite linear; /* 讓它有一點點緩慢的蠕動感 */
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: wave 20s infinite linear;
 }
 @keyframes wave {
   0% { transform: rotate(0deg); }
