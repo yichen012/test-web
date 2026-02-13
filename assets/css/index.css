@@ -1,3 +1,254 @@
+/* 時間軸 */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+
+.process {
+    width: 100%;
+    height: 100vh;
+    padding-top: 250px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.process__inner {
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0 auto;
+}
+
+.process__arrow {
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    background-color: #69a8eb;
+    transform-origin: left center;
+    z-index: 1;
+}
+
+.process__arrow::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #69a8eb;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.process__item {
+    position: relative;
+    z-index: 2;
+}
+
+.process__mark {
+    width: 100%;
+    height: 80px;
+    position: relative;
+}
+
+.process__bar {
+    display: inline-block;
+    width: 2px;
+    height: 100%;
+    background-color: #69a8eb;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform-origin: center bottom;
+}
+
+.process__circle {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #69a8eb;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-8px);
+    /*box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);*/
+}
+
+.process__term {
+    font-size: 16px;
+    color: #69a8eb;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    white-space: nowrap;
+}
+
+.process__wrap {
+    width: 100%;
+}
+
+.process__text {
+    font-size: 25px;
+    color: #333333;
+    line-height: 1.8;
+    padding: 15px 15px 0 15px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.section-title {
+    width: 100%;
+    max-width: 1200px;
+    text-align: left;
+    margin-bottom: 220px;
+}
+
+.section-title h2 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #333;
+    font-family: 'Noto Serif HK', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 60px;
+    height: 4px;
+    background-color: #ff708d;
+    border-radius: 2px;
+}
+
+/* RWD 手機版處理：若寬度太小則滾動或縮小文字 */
+@media screen and (max-width: 768px) {
+
+    /* 1. 讓整體高度從 100vh 釋放，避免手機版內容塞不下 */
+    .process {
+        height: auto;
+        padding: 80px 20px;
+        display: block;
+        /* 移除 flex 居中，讓內容順著流下來 */
+    }
+
+    .process__inner {
+        display: flex;
+        flex-direction: column;
+        /* 橫向變縱向 */
+        max-width: 100%;
+        padding-left: 30px;
+        /* 為左側線條留空間 */
+    }
+
+    /* 2. 讓生長線變垂直 */
+    .process__arrow {
+        width: 3px;
+        /* 寬度變窄 */
+        height: 100%;
+        /* 高度填滿 */
+        top: 0;
+        left: 0;
+        /* 靠左排列 */
+        transform-origin: top center;
+        /* 從上方開始生長 */
+    }
+
+    /* 隱藏原本的箭頭尖端（或調整角度） */
+    .process__arrow::after {
+        display: none;
+    }
+
+    /* 3. 調整每一個項目 */
+    .process__item {
+        margin-bottom: 50px;
+        /* 增加項目間距 */
+        text-align: left;
+        /* 文字靠左對齊 */
+    }
+
+    .process__mark {
+        height: auto;
+    }
+
+    /* 4. 調整圓點與垂直小線段 */
+    .process__circle {
+        left: -8px;
+        /* 對齊垂直主線 */
+        bottom: auto;
+        top: 0;
+    }
+
+    .process__bar {
+        display: none;
+        /* 手機版通常不需要額外的連接線，主線已足夠 */
+    }
+
+    /* 5. 調整文字位置 */
+    .process__term {
+        position: relative;
+        top: -5px;
+        left: 20px;
+        font-size: 1.1rem;
+    }
+
+    .process__text {
+        padding: 10px 0 0 20px;
+        font-size: 0.95rem;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+    }
+}
+
+.our-story .story-content {
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.our-story .story-subtitle {
+    display: block;
+    font-size: 25px;
+    color: #69a8eb;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .our-story .story-content {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    .our-story .story-subtitle {
+        font-size: 22px;
+    }
+}
+
 /*three*/
 #home.hero,
 #hero-carousel,
@@ -88,18 +339,37 @@
         opacity: 1;
     }
 }
+@media (max-width: 1253px) {
 
-@media (max-width: 1024px) {
+    .process__text {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 1175px) {
+
+    .process__text {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 1095px) {
     .overlay-text {
         right: 5%;
         max-width: 380px;
     }
+
     .overlay-text h2 {
         font-size: 3.2rem;
+    }
+
+    .process__text {
+        font-size: 19px;
     }
 }
 
 @media (max-width: 1830px) {
+
     #home.hero,
     #hero-carousel,
     .carousel-inner,
@@ -115,7 +385,7 @@
     }
 
     .overlay-text h2 {
-        font-size: 2.8rem; 
+        font-size: 2.8rem;
         -webkit-text-stroke: 0.5px #1a2533;
     }
 
@@ -124,52 +394,60 @@
         margin-top: 15px;
     }
 }
+
 @media (max-width: 768px) {
     #home.hero {
         margin-bottom: 50px;
     }
+
     .overlay-text {
         top: 75%;
         right: 5%;
         max-width: 280px;
     }
+
     .overlay-text h2 {
         font-size: 1.8rem;
     }
+
     #home.hero,
     #hero-carousel,
     .carousel-inner,
     .carousel-item {
         height: 75vh !important;
-        min-height: 650px ;
-        background-color: #f8fafc; 
+        min-height: 650px;
+        background-color: #f8fafc;
     }
 
     /* 2. 讓點點背景容器填滿這個高度 */
     .three-canvas-container {
-        height: 100% ;
+        height: 100%;
         background-color: #f8fafc;
         background-image: radial-gradient(#cbd8eb 1.2px, transparent 1px);
         background-size: 40px 40px;
     }
-    
+
 }
+
 /* 針對超小螢幕 (iPhone SE 等) */
 @media (max-width: 480px) {
     .overlay-text h2 {
         font-size: 1.8rem;
     }
-    
-    #home.hero, #hero-carousel {
+
+    #home.hero,
+    #hero-carousel {
         height: 50vh;
         min-height: 350px;
     }
+
     .overlay-text {
         top: 75%;
     }
+
     .three-canvas-container {
         height: auto;
-        }
+    }
 }
 
 /*powder*/
@@ -182,9 +460,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .wave-feature-content {
@@ -318,10 +596,10 @@
     }
 
     .wave-feature-content h2 {
-        font-size: 2.2rem ; 
+        font-size: 2.2rem;
         margin-bottom: 40px;
         letter-spacing: 2px;
-        white-space: normal ;
+        white-space: normal;
     }
 
     .features-row {
@@ -467,7 +745,7 @@
 }
 
 .road-car img {
-    filter: drop-shadow(0 10px 5px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.1));
     width: 150%;
 }
 
@@ -481,22 +759,24 @@
     transform: translateX(-50%);
     background: linear-gradient(to bottom, #121212 90%, transparent);
 }
-#road-car-title{
+
+#road-car-title {
     position: absolute;
     top: 10%;
     font-size: 2.2rem;
     font-weight: 900;
-    color:#1a2533;
-    font-family: "Raleway", sans-serif;
+    color: #1a2533;
+    font-family: 'Noto Serif HK', sans-serif;
 }
 
-#road-car-title-p{
+#road-car-title-p {
     position: absolute;
-    top: 15%;
+    top: 16%;
     font-size: 1.2rem;
-    color:#ff708d;
+    color: #ff708d;
     letter-spacing: 0.2em;
 }
+
 .road-text-container {
     position: absolute;
     top: 25%;
@@ -508,21 +788,26 @@
     width: 90%;
     z-index: 6;
 }
+
 .road-text-group {
     text-align: center;
     opacity: 0;
-    transform: translateY(20px); /* 預設往下一點 */
+    transform: translateY(20px);
+    /* 預設往下一點 */
     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 .road-text-group.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
+
 .road-stage.is-visible .road-text-container {
     opacity: 1;
     transform: translate(-50%, -150%) translateY(0);
 }
-.road-text-container img{
+
+.road-text-container img {
     max-width: 200px;
 }
 
@@ -530,7 +815,7 @@
     font-size: 2rem;
     font-weight: 900;
     margin: 0 0 10px 0;
-    
+
     background: linear-gradient(45deg, #ff708d 30%, #4a90e2 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -545,25 +830,32 @@
     margin: 0;
     max-width: 200px;
 }
+
 .road-text.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
 .parallax-mountains {
-  content: "";
-  position: absolute;
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, rgba(235, 245, 255, 0.8) 0%, transparent 70%);
-  top: -40%;
-  left: -20%;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  animation: wave 20s infinite linear;
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(235, 245, 255, 0.8) 0%, transparent 70%);
+    top: -40%;
+    left: -20%;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    animation: wave 20s infinite linear;
 }
+
 @keyframes wave {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 
@@ -588,6 +880,7 @@
         height: 95vh;
         align-items: flex-end;
     }
+
     .road-text-container img {
         max-width: 160px;
         height: auto;
@@ -600,6 +893,7 @@
         height: auto;
     }
 }
+
 @media (max-width: 495px) {
     .road-text-container img {
         max-width: 100px;
@@ -615,7 +909,8 @@
         transform: translateX(-50%);
         width: 100%;
         max-width: 100vw;
-        height: 260px; /* 一定要有高度 */
+        height: 260px;
+        /* 一定要有高度 */
         z-index: 10;
     }
 

@@ -3,6 +3,13 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+
+THREE.DefaultLoadingManager.onLoad = function ( ) {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        loadingScreen.classList.add('loader-hidden');
+    }
+};
 const activeScenes = {};
 
 function initThreeScene(containerId) {

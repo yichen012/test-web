@@ -3,6 +3,8 @@
 
 <head>
     <!-- Google tag (gtag.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6PMEPH11T8"></script>
     <script>
@@ -73,8 +75,6 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="pages/detail.html">product</a></li>
-                    <li><a href="pages/news.html">News</a></li>
                     <li><a href="pages/contact.html">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -110,7 +110,7 @@
                         <div id="threejs-container-2" class="three-canvas-container"
                             data-model="assets/img/3d-model/mesh.glb"></div>
                         <div class="overlay-text">
-                            <h2>數位掃描技術</h2>
+                            <h2>數位加工技術</h2>
                             <p>高精度還原細節</p>
                         </div>
                     </div>
@@ -118,16 +118,16 @@
                         <div id="threejs-container-3" class="three-canvas-container"
                             data-model="assets/img/3d-model/plate.glb"></div>
                         <div class="overlay-text">
-                            <h2>數位掃描技術</h2>
-                            <p>高精度還原細節</p>
+                            <h2>骨科精準列印</h2>
+                            <p>醫療級鈦粉，安心取件</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div id="threejs-container-4" class="three-canvas-container"
                             data-model="assets/img/3d-model/plate-3.glb"></div>
                         <div class="overlay-text">
-                            <h2>數位掃描技術</h2>
-                            <p>高精度還原細節</p>
+                            <h2>客製化製造</h2>
+                            <p>量身訂製，高度貼合</p>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -186,25 +186,31 @@
                         <div class="our-story">
                             <h4>Est 2025</h4>
                             <h3>Our Story</h3>
-                            <p>
-                                【值得信賴的夥伴】
-                                澄乘科技為2025年成立的新創公司，經營團隊主要由工研院spin-off，秉持著『創新、誠信、連結』經營理念，
-                                與台灣牙骨科臨床醫師，以及供應鏈廠商合作，共同追求高性能、多功能、客製化的高階醫材開發，以滿足更多臨
-                                床病患的需求，並打造台灣供應鏈，追求企業永續經營成長。
-                            </p>
-                            <p>
-                                【深耕技術與擴大服務】
-                                公司核心技術為客製化醫材設計與金屬列印製造服務，以3D列印技術為核心，以雷射積層製造骨科與牙科等金屬醫材
-                                ，結合大量跨領域知識，打造符合市場的製造服務與生產型態。
-                            </p>
-                            <p>
-                                【學習型的成長組織】
-                                重視每一位員工的學習，秉持著「創新、誠信、分享」的精神，打造適才適所的舞台，經營企業的目標是追求全體員
-                                工的幸福。在經營企業創造價值的過程學習與成長，讓經營者自身、企業員工，乃至所有的合作夥
-                                伴，都變得更為純潔美好。
-                            </p>
+                            <div class="story-item">
+                                <strong class="story-subtitle">值得信賴的夥伴</strong>
+                                <p class="story-content">
+                                    澄乘科技為2025年成立的新創公司，經營團隊主要由工研院spin-off，秉持著『創新、誠信、連結』經營理念，
+                                    與台灣牙骨科臨床醫師，以及供應鏈廠商合作，共同追求高性能、多功能、客製化的高階醫材開發，以滿足更多臨
+                                    床病患的需求，並打造台灣供應鏈，追求企業永續經營成長。
+                                </p>
+                            </div>
 
+                            <div class="story-item">
+                                <strong class="story-subtitle">深耕技術與擴大服務</strong>
+                                <p class="story-content">
+                                    公司核心技術為客製化醫材設計與金屬列印製造服務，以3D列印技術為核心，以雷射積層製造骨科與牙科等金屬醫材
+                                    ，結合大量跨領域知識，打造符合市場的製造服務與生產型態。
+                                </p>
+                            </div>
 
+                            <div class="story-item">
+                                <strong class="story-subtitle">學習型的成長組織</strong>
+                                <p class="story-content">
+                                    重視每一位員工的學習，秉持著「創新、誠信、分享」的精神，打造適才適所的舞台，經營企業的目標是追求全體員
+                                    工的幸福。在經營企業創造價值的過程學習與成長，讓經營者自身、企業員工，乃至所有的合作夥
+                                    伴，都變得更為純潔美好。
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -215,6 +221,72 @@
             </div>
 
         </section><!-- /About Section -->
+
+        <section class="process">
+            <div class="container">
+                <div class="section-title">
+                    <h2>時間沿革</h2>
+                </div>
+                <div class="process__inner">
+                    <div class="process__arrow"></div>
+
+                    <div class="process__item">
+                        <div class="process__mark">
+                            <p class="process__term">2025/04/09</p>
+                            <span class="process__bar"></span>
+                            <span class="process__circle"></span>
+                        </div>
+                        <div class="process__wrap">
+                            <p class="process__text">正式登記成立<br>開啟品牌新篇章</p>
+                        </div>
+                    </div>
+
+                    <div class="process__item">
+                        <div class="process__mark">
+                            <p class="process__term">2025/04/24</p>
+                            <span class="process__bar"></span>
+                            <span class="process__circle"></span>
+                        </div>
+                        <div class="process__wrap">
+                            <p class="process__text">販賣醫療器材許可<br>具備市場銷售資格</p>
+                        </div>
+                    </div>
+
+                    <div class="process__item">
+                        <div class="process__mark">
+                            <p class="process__term">2025/08/11</p>
+                            <span class="process__bar"></span>
+                            <span class="process__circle"></span>
+                        </div>
+                        <div class="process__wrap">
+                            <p class="process__text">工廠登記完成<br>標準化生產基地</p>
+                        </div>
+                    </div>
+
+                    <div class="process__item">
+                        <div class="process__mark">
+                            <p class="process__term">2025/08/24</p>
+                            <span class="process__bar"></span>
+                            <span class="process__circle"></span>
+                        </div>
+                        <div class="process__wrap">
+                            <p class="process__text">醫療器材製造許可<br>符合高規格製造標準</p>
+                        </div>
+                    </div>
+
+                    <div class="process__item">
+                        <div class="process__mark">
+                            <p class="process__term">2026/02/10</p>
+                            <span class="process__bar"></span>
+                            <span class="process__circle"></span>
+                        </div>
+                        <div class="process__wrap">
+                            <p class="process__text">QMS 認證通過<br>品質管理系統認可</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!--specialized-->
         <section class="wave-feature-section">
@@ -272,14 +344,14 @@
                     </div>
                     <div class="card-text-full">
                         <h4>材料認證</h4>
-                        <p>Modern Architecture</p>
+                        <p>Material Certification</p>
                     </div>
                 </div>
                 <div class="card-item-full item-2">
                     <div class="card-photo-full gf2"></div>
                     <div class="card-text-full">
                         <h4>設計開發</h4>
-                        <p>Minimalist Interior</p>
+                        <p>Design and Development</p>
                     </div>
                 </div>
             </div>
@@ -288,21 +360,21 @@
                     <div class="card-photo-full gf3"></div>
                     <div class="card-text-full">
                         <h4>力學分析</h4>
-                        <p>Modern Architecture</p>
+                        <p>Mechanical Analysis</p>
                     </div>
                 </div>
                 <div class="card-item-full item-4">
                     <div class="card-photo-full gf4"></div>
                     <div class="card-text-full">
                         <h4>製程模擬</h4>
-                        <p>Minimalist Interior</p>
+                        <p>Process Simulation</p>
                     </div>
                 </div>
                 <div class="card-item-full item-5">
                     <div class="card-photo-full gf5"></div>
                     <div class="card-text-full">
                         <h4>品質檢驗</h4>
-                        <p>Quality Assurance</p>
+                        <p>Quality Inspection</p>
                     </div>
                 </div>
             </div>
@@ -334,58 +406,60 @@
                         <div class="card-intro">
                             <h4 class="card-title">金屬支架</h4>
                             <p class="card-description">cobalt-chromium Framework</p>
-                            <p class="card-description">金屬支架是活動部分義齒的骨架結構，旨在提供穩定性、固位力和功能性，讓患者能舒適有效地使用假牙。</p>
+                            <p class="card-description chi">金屬支架是活動部分義齒的骨架結構，旨在提供穩定性、固位力和功能性，讓患者能舒適有效地使用假牙。</p>
                         </div>
                     </li>
                     <li id="box2" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">骨板</h4>
                             <p class="card-description">Bone Plate</p>
-                            <p class="card-description">主要作用是作為內部固定器，利用螺釘將骨板固定在骨頭表面或內部，以穩定骨折、矯正截骨或骨骼重建後的骨段。</p>
+                            <p class="card-description chi">主要作用是作為內部固定器，利用螺釘將骨板固定在骨頭表面或內部，以穩定骨折、矯正截骨或骨骼重建後的骨段。</p>
                         </div>
                     </li>
                     <li id="box3" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">三明治假牙</h4>
                             <p class="card-description">Denture</p>
-                            <p class="card-description">由樹脂製成的牙齦藉由金屬連接體與人工假牙結合。</p>
+                            <p class="card-description chi">由樹脂製成的牙齦藉由金屬連接體與人工假牙結合。</p>
                         </div>
                     </li>
                     <li id="box4" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">椎間融合器</h4>
                             <p class="card-description">Cage</p>
-                            <p class="card-description">取代病變的椎間盤，在相鄰的兩個椎體之間提供穩定的支，有利於骨骼生長與融合。</p>
+                            <p class="card-description chi">取代病變的椎間盤，在相鄰的兩個椎體之間提供穩定的支，有利於骨骼生長與融合。</p>
                         </div>
                     </li>
                     <li id="box5" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">人工關節</h4>
                             <p class="card-description">Artificial Joints</p>
-                            <p class="card-description">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
+                            <p class="card-description chi">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
                         </div>
                     </li>
+                    <!--
                     <li id="box6" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">植體連桿</h4>
                             <p class="card-description">Implant bar</p>
-                            <p class="card-description">牙根由鈦金屬精準加工，搭配由鈷鉻、鈦、二氧化鋯製成的牙冠，加速骨整合，大幅提升植牙成功率與長期穩定性。</p>
+                            <p class="card-description chi">牙根由鈦金屬精準加工，搭配由鈷鉻、鈦、二氧化鋯製成的牙冠，加速骨整合，大幅提升植牙成功率與長期穩定性。</p>
                         </div>
                     </li>
                     <li id="box7" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">鈦網</h4>
                             <p class="card-description">Ti Mesh</p>
-                            <p class="card-description">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
+                            <p class="card-description chi">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
                         </div>
                     </li>
                     <li id="box8" class="card-list">
                         <div class="card-intro">
                             <h4 class="card-title">口顎彌補物</h4>
                             <p class="card-description"> Oral and Maxillofacial Prosthesis</p>
-                            <p class="card-description">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
+                            <p class="card-description chi">旨在取代因疾病（如嚴重退化性關節炎、類風濕性關節炎）或創傷而嚴重受損、功能喪失的人體關節。</p>
                         </div>
                     </li>
+                    -->
                 </ul>
             </div>
             <div class="minimal-header">
@@ -507,7 +581,7 @@
 
                         <div class="info phone-email-info">
                             <p><strong>Phone:</strong> <span>07-6955658</span></p>
-                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                            <p><strong>Email:</strong> <span>chcheng@lucid-am.com</span></p>
                         </div>
 
                     </div>
@@ -525,7 +599,8 @@
 
         <div class="container copyright text-center">
             <p>
-                © <span>Copyright</span> <strong class="px-1 sitename">Lucid</strong> <span>All Rights Reserved</span>
+                © <span>Copyright</span> <strong class="px-1 sitename">Lucid-am</strong> <span>All Rights
+                    Reserved</span>
             </p>
         </div>
 
@@ -537,7 +612,12 @@
     </a>
 
     <!-- Preloader -->
-    <div id="preloader"></div>
+    <div id="loading-screen">
+        <div class="loader-container">
+            <div class="spinner"></div>
+            <div class="loading-text">Lucid-am<span>.</span><span>.</span><span>.</span></div>
+        </div>
+    </div>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -554,6 +634,8 @@
     <script type="module" src="assets/js/grass.js"></script>
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/card-slide.js"></script>
+    <script src="assets/js/loading.js"></script>
+    <script src="assets/js/timeline.js"></script>
 
 </body>
 

@@ -129,7 +129,6 @@
     margin-bottom: 10%;
     position: absolute;
 }
-
 .card-description {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -140,6 +139,9 @@
     word-break: break-all;
     margin-bottom: -155px;
     white-space: normal;
+}
+.card-description.chi {
+    font-family: "Courier New", monospace;
 }
 
 .card-list:hover .card-intro {
@@ -174,14 +176,14 @@
     cursor: pointer;
     font-size: 40px;
     z-index: 99;
-    color: #4a90e2;
+    color: #adadad;
     top: 50%;
     transform: translateY(-50%);
     transition: color 0.3s;
 }
 
 #card-prev:hover, #card-next:hover {
-    color: #333;
+    color: #4a90e2;
 }
 
 #card-prev { left: 2.5rem; }
@@ -200,52 +202,48 @@
     .title-text { font-size: 1.6rem; }
     #card-prev, #card-next { display: none; }
     #card-menu {
-        cursor: grab; /* 滑鼠移上去變成小手，提示可以抓取 */
-        touch-action: pan-y; /* 允許垂直捲動頁面，但水平由我們 JS 處理 */
+        cursor: grab;
+        touch-action: pan-y;
     }
 
     #card-menu:active {
-        cursor: grabbing; /* 抓取時的圖示 */
+        cursor: grabbing;
     }
 }
 
 @media (max-width: 768px) {
-    /* 1. 調整整體容器：減少左右邊界，方便手機滑動 */
     #card-menu {
-        -webkit-mask-image: none; /* 手機版通常不需要遮罩，以免內容看不清 */
+        -webkit-mask-image: none;
         mask-image: none;
-        overflow-x: auto; /* 允許原生水平捲動 */
-        -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更順暢 */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     #cards {
-        padding: 1.5rem 1rem; /* 縮減內距，讓第一張卡片更靠左 */
-        gap: 1rem; /* 使用間距代替 margin-right */
+        padding: 1.5rem 1rem;
+        gap: 1rem;
     }
 
-    /* 2. 調整卡片尺寸：避免卡片太大撐破螢幕 */
     .card-list {
-        width: 15rem; /* 手機版寬度稍微縮小 */
-        height: 18rem; /* 高度稍微拉長，給文字更多空間 */
-        margin: 0; /* 改用 parent 的 gap 控制 */
-        flex-shrink: 0; /* 防止卡片被壓縮 */
+        width: 15rem;
+        height: 18rem;
+        margin: 0;
+        flex-shrink: 0;
     }
 
-    /* 3. 修正文字排版：手機版文字不能太擠 */
     .card-title {
-        font-size: 1.3rem; /* 標題縮小一點 */
+        font-size: 1.3rem;
         margin-bottom: 15%;
     }
 
     .card-description {
-        font-size: 0.95rem; /* 敘述字體調小 */
+        font-size: 0.95rem;
         line-height: 1.4;
-        margin-bottom: -140px; /* 配合手機版高度微調位置 */
+        margin-bottom: -140px;
     }
 
-    /* 4. 觸控優化：因為手機沒有 hover，建議讓文字遮罩稍微明顯一點 */
     .card-list:hover .card-title {
-        font-size: 1.6rem; /* 縮小 hover 時的放大倍率 */
+        font-size: 1.6rem;
         transform: translateY(-1.5rem);
     }
 
@@ -253,17 +251,22 @@
         transform: translateY(-1.5rem);
     }
 
-    /* 5. 隱藏導航按鈕 (手機用手指滑即可) */
     #card-prev, #card-next {
         display: none !important;
     }
 }
 
-/* 針對極小螢幕 (如 iPhone SE) */
 @media (max-width: 380px) {
     .card-list {
         width: 13rem;
         height: 16rem;
+    }
+    .card-title {
+        font-size: 1.3rem;
+        margin-bottom: 25%;
+    }
+    .card-description {
+        font-size: 0.9rem;
     }
 }
 /*----------------生產特色--------------------------*/
@@ -360,18 +363,15 @@
   transition: transform 0.4s ease;
 }
 
-/* 3. 圖片區：利用 aspect-ratio 鎖定比例 */
 .card-photo-full {
   width: 100%;
   position: relative;
   aspect-ratio: 16 / 9;
-  /* 經典攝影比例，也可改為 16/9 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* 4. 下方文字區：留白空間 */
 .card-text-full {
   padding: 2rem;
   position: relative;
@@ -380,7 +380,7 @@
 .card-text-full h4 {
   margin: 0;
   font-size: 1.5rem;
-  /* 滿版後字體要加大才有氣勢 */
+  font-family: 'Noto Serif HK', sans-serif;
   color: #1a1a1a;
   font-weight: 700;
   display: inline;
@@ -394,7 +394,6 @@
   -webkit-box-decoration-break: clone;
   line-height: 1.6;
   background-size: 0% 100%;
-  /* 預設寬度為 0 */
   background-repeat: no-repeat;
   transition: background-size 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -512,7 +511,7 @@
   align-items: center;
   justify-content: center;
   gap: 3em;
-  animation: spin 10s infinite linear;
+  animation: spin 20s infinite linear;
   padding-right: 3rem;
 }
 

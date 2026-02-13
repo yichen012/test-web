@@ -110,7 +110,7 @@ h6 {
 
 /* PHP Email Form Messages
 ------------------------------*/
-.php-email-form .error-message {
+.custom-form .error-message {
     display: none;
     background: #df1529;
     color: #ffffff;
@@ -120,7 +120,7 @@ h6 {
     font-weight: 600;
 }
 
-.php-email-form .sent-message {
+.custom-form .sent-message {
     display: none;
     color: #ffffff;
     background: #059652;
@@ -130,7 +130,7 @@ h6 {
     font-weight: 600;
 }
 
-.php-email-form .loading {
+.custom-form .loading {
     display: none;
     background: var(--surface-color);
     text-align: center;
@@ -138,7 +138,7 @@ h6 {
     margin-bottom: 24px;
 }
 
-.php-email-form .loading:before {
+.custom-form .loading:before {
     content: "";
     display: inline-block;
     border-radius: 50%;
@@ -147,10 +147,10 @@ h6 {
     margin: 0 10px -6px 0;
     border: 3px solid var(--accent-color);
     border-top-color: var(--surface-color);
-    animation: php-email-form-loading 1s linear infinite;
+    animation: custom-form-loading 1s linear infinite;
 }
 
-@keyframes php-email-form-loading {
+@keyframes custom-form-loading {
     0% {
         transform: rotate(0deg);
     }
@@ -305,8 +305,8 @@ h6 {
         justify-content: space-between;
         white-space: nowrap;
         transition: 0.3s;
+        transform: scale(1.2);
     }
-
     .navmenu a i,
     .navmenu a:focus i {
         font-size: 12px;
@@ -760,37 +760,102 @@ h6 {
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
-#preloader {
+#loading-screen {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 999999;
-    overflow: hidden;
-    background: var(--background-color);
-    transition: all 0.6s ease-out;
+    transition: opacity 0.5s ease, visibility 0.5s;
 }
 
-#preloader:before {
-    content: "";
-    position: fixed;
-    top: calc(50% - 30px);
-    left: calc(50% - 30px);
-    border: 6px solid #ffffff;
-    border-color: var(--accent-color) transparent var(--accent-color) transparent;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: animate-preloader 1.5s linear infinite;
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* 方塊與文字的間距 */
 }
 
-@keyframes animate-preloader {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+/* 文字基礎樣式 */
+.loading-text {
+    color: black;
+    font-family: 'Roboto', sans-serif; /* 使用你 HTML 裡已有的字體 */
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 300;
 }
+
+/* 讓三個點點依序閃爍 */
+.loading-text span {
+    animation: dots 1.5s infinite;
+    opacity: 0;
+}
+
+.loading-text span:nth-child(1) { animation-delay: 0s; }
+.loading-text span:nth-child(2) { animation-delay: 0.3s; }
+.loading-text span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes dots {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+.spinner {
+  --size: 30px;
+  --first-block-clr: #4a90e2;
+  --second-block-clr: #ff708d;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.spinner::after,
+.spinner::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  width: var(--size);
+  height: var(--size);
+  top: 50%;
+  left: 50%;
+  animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+  background: var(--first-block-clr);
+}
+
+.spinner::after {
+  background: var(--second-block-clr);
+  top: calc(50% - var(--size));
+  left: calc(50% - var(--size));
+  animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes down {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(100%); }
+  50% { transform: translateX(100%) translateY(100%); }
+  75% { transform: translateY(100%); }
+}
+
+@keyframes up {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(-100%); }
+  50% { transform: translateX(-100%) translateY(-100%); }
+  75% { transform: translateY(-100%); }
+}
+
+/* 隱藏 class */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 /*--------------------------------------------------------------
 # Scroll Top Button
@@ -1049,13 +1114,14 @@ section,
     line-height: 0;
     background: color-mix(in srgb, var(--default-color), transparent 90%);
     border-radius: 50px;
-    color: var(--contrast-color);
+    color: #adadad;
     transition: 0.3s;
     width: 54px;
     height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-text-stroke: 1.5px currentColor;
 }
 
 .hero .carousel-control-prev,
@@ -1084,7 +1150,7 @@ section,
 
 .hero .carousel-indicators li {
     cursor: pointer;
-    background: var(--default-color);
+    background: #adadad;
     overflow: hidden;
     border: 0;
     width: 12px;
@@ -1092,11 +1158,14 @@ section,
     border-radius: 50px;
     opacity: 0.6;
     transition: 0.3s;
+    transform: scale(0.5);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, background 0.3s ease;
 }
 
 .hero .carousel-indicators li.active {
     opacity: 1;
     background: var(--accent-color);
+    transform: scale(0.8);
 }
 
 /*--------------------------------------------------------------
@@ -1110,6 +1179,7 @@ section,
 
 .about .our-story {
     padding: 40px;
+    margin-left: -150px;
     background-color: color-mix(in srgb, var(--default-color), transparent 96%);
 }
 
@@ -1496,6 +1566,10 @@ section,
     padding-top: 0;
 }
 
+.contact .mb{
+    margin-bottom: 5%;
+}
+
 .contact .info {
     background-color: var(--surface-color);
     padding: 40px;
@@ -1542,17 +1616,17 @@ section,
     color: color-mix(in srgb, var(--default-color), transparent 40%);
 }
 
-.contact .php-email-form {
+.contact .custom-form {
     width: 100%;
 }
 
-.contact .php-email-form .form-group {
+.contact .custom-form .form-group {
     padding-bottom: 8px;
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
-.contact .php-email-form textarea {
+.contact .custom-form input[type=text],
+.contact .custom-form input[type=email],
+.contact .custom-form textarea {
     color: var(--default-color);
     background-color: var(--surface-color);
     border-radius: 0px;
@@ -1561,30 +1635,30 @@ section,
     border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
-.contact .php-email-form textarea:focus {
+.contact .custom-form input[type=text]:focus,
+.contact .custom-form input[type=email]:focus,
+.contact .custom-form textarea:focus {
     border-color: var(--accent-color);
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
-.contact .php-email-form textarea::placeholder {
+.contact .custom-form input[type=text]::placeholder,
+.contact .custom-form input[type=email]::placeholder,
+.contact .custom-form textarea::placeholder {
     color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email] {
+.contact .custom-form input[type=text],
+.contact .custom-form input[type=email] {
     height: 48px;
     padding: 10px 15px;
 }
 
-.contact .php-email-form textarea {
+.contact .custom-form textarea {
     padding: 10px 12px;
     height: 290px;
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .custom-form button[type=submit] {
     background: var(--accent-color);
     color: var(--contrast-color);
     border: 0;
@@ -1593,7 +1667,7 @@ section,
     border-radius: 4px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .custom-form button[type=submit]:hover {
     background: color-mix(in srgb, var(--accent-color) 90%, black 15%);
 }
 
