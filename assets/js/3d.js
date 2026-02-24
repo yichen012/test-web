@@ -4,7 +4,7 @@ import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
-THREE.DefaultLoadingManager.onLoad = function ( ) {
+THREE.DefaultLoadingManager.onLoad = function () {
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
         loadingScreen.classList.add('loader-hidden');
@@ -19,8 +19,10 @@ function initThreeScene(containerId) {
     const modelPath = container.getAttribute('data-model');
     const scene = new THREE.Scene();
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || 500;
+    const isMobile = window.innerWidth < 768;
+    const cameraZ = isMobile ? -7 : -4;
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.set(-1.4, 0, -4);
@@ -29,9 +31,8 @@ function initThreeScene(containerId) {
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // --- 關鍵優化 1：解決白斑與剝落感 ---
-    renderer.toneMapping = THREE.ACESFilmicToneMapping; // 使用電影級色調映射
-    renderer.toneMappingExposure = 1.2;               // 調整亮度（若太亮可降至 1.0）
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     container.appendChild(renderer.domElement);
@@ -59,14 +60,10 @@ function initThreeScene(containerId) {
     loader.load(modelPath, (gltf) => {
         const model = gltf.scene;
 
-        // --- 關鍵優化 2：方案 A - 強制增加粗糙度下限 ---
         model.traverse((child) => {
             if (child.isMesh) {
-                // 確保材質抓取環境反射
                 child.material.envMap = scene.environment;
 
-                // 強制設定粗糙度下限，消除銳利白斑
-                // 0.15~0.2 之間最能保持金屬感且不產生鋸齒
                 if (child.material.roughness < 0.18) {
                     child.material.roughness = 0.18;
                 }
@@ -74,13 +71,25 @@ function initThreeScene(containerId) {
                 child.material.needsUpdate = true;
             }
         });
-
-        // 置中
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
         model.position.sub(center);
 
         model.scale.set(3.8, 3.8, 3.8);
+        scene.add(model);
+        const isSmallMobile = window.innerWidth <= 375; // 針對 iPhone SE 等小螢幕
+        const isMobile = window.innerWidth <= 768;      // 針對一般手機
+
+        let responsiveScale;
+        if (isSmallMobile) {
+            responsiveScale = 2.2; // SE 用的比例，比原本 3.8 小很多
+        } else if (isMobile) {
+            responsiveScale = 2.8; // 一般手機 (如 12 Pro) 用的比例
+        } else {
+            responsiveScale = 3.8; // 電腦版維持原樣
+        }
+
+        model.scale.set(responsiveScale, responsiveScale, responsiveScale);
         scene.add(model);
 
         activeScenes[containerId] = { scene, camera, renderer, controls };
@@ -94,7 +103,6 @@ function initThreeScene(containerId) {
     animate();
 }
 
-// (其餘視窗縮放與 Carousel 監聽程式碼保持不變...)
 window.addEventListener('resize', () => {
     Object.keys(activeScenes).forEach(id => {
         const item = activeScenes[id];

@@ -307,6 +307,7 @@ h6 {
         transition: 0.3s;
         transform: scale(1.2);
     }
+
     .navmenu a i,
     .navmenu a:focus i {
         font-size: 12px;
@@ -778,13 +779,15 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; /* 方塊與文字的間距 */
+    gap: 20px;
+    /* 方塊與文字的間距 */
 }
 
 /* 文字基礎樣式 */
 .loading-text {
     color: black;
-    font-family: 'Roboto', sans-serif; /* 使用你 HTML 裡已有的字體 */
+    font-family: 'Roboto', sans-serif;
+    /* 使用你 HTML 裡已有的字體 */
     font-size: 18px;
     letter-spacing: 2px;
     font-weight: 300;
@@ -796,58 +799,100 @@ h6 {
     opacity: 0;
 }
 
-.loading-text span:nth-child(1) { animation-delay: 0s; }
-.loading-text span:nth-child(2) { animation-delay: 0.3s; }
-.loading-text span:nth-child(3) { animation-delay: 0.6s; }
+.loading-text span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loading-text span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.loading-text span:nth-child(3) {
+    animation-delay: 0.6s;
+}
 
 @keyframes dots {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 
 .spinner {
-  --size: 30px;
-  --first-block-clr: #4a90e2;
-  --second-block-clr: #ff708d;
-  width: 100px;
-  height: 100px;
-  position: relative;
+    --size: 30px;
+    --first-block-clr: #4a90e2;
+    --second-block-clr: #ff708d;
+    width: 100px;
+    height: 100px;
+    position: relative;
 }
 
 .spinner::after,
 .spinner::before {
-  box-sizing: border-box;
-  position: absolute;
-  content: "";
-  width: var(--size);
-  height: var(--size);
-  top: 50%;
-  left: 50%;
-  animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-  background: var(--first-block-clr);
+    box-sizing: border-box;
+    position: absolute;
+    content: "";
+    width: var(--size);
+    height: var(--size);
+    top: 50%;
+    left: 50%;
+    animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+    background: var(--first-block-clr);
 }
 
 .spinner::after {
-  background: var(--second-block-clr);
-  top: calc(50% - var(--size));
-  left: calc(50% - var(--size));
-  animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+    background: var(--second-block-clr);
+    top: calc(50% - var(--size));
+    left: calc(50% - var(--size));
+    animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
 }
 
 @keyframes down {
-  0%, 100% { transform: none; }
-  25% { transform: translateX(100%); }
-  50% { transform: translateX(100%) translateY(100%); }
-  75% { transform: translateY(100%); }
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(100%);
+    }
+
+    50% {
+        transform: translateX(100%) translateY(100%);
+    }
+
+    75% {
+        transform: translateY(100%);
+    }
 }
 
 @keyframes up {
-  0%, 100% { transform: none; }
-  25% { transform: translateX(-100%); }
-  50% { transform: translateX(-100%) translateY(-100%); }
-  75% { transform: translateY(-100%); }
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(-100%) translateY(-100%);
+    }
+
+    75% {
+        transform: translateY(-100%);
+    }
 }
 
 /* 隱藏 class */
@@ -974,9 +1019,9 @@ section,
     font-size: 32px;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 10px 25px; 
+    padding: 10px 25px;
     position: relative;
-    color:#000000;
+    color: #000000;
 }
 
 .section-title h2:after {
@@ -1179,7 +1224,7 @@ section,
 
 .about .our-story {
     padding: 40px;
-    margin-left: -150px;
+    margin-left: -5%;
     background-color: color-mix(in srgb, var(--default-color), transparent 96%);
 }
 
@@ -1246,7 +1291,7 @@ section,
     height: 100%;
     overflow: hidden;
     min-height: inherit;
-    display: block; 
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1262,6 +1307,7 @@ section,
     position: absolute;
     inset: 0;
     opacity: 0;
+    margin-right: -5%;
     transition: opacity 0.8s ease-in-out;
     z-index: 1;
 }
@@ -1271,7 +1317,7 @@ section,
     z-index: 2;
 }
 
-.about-slide img, 
+.about-slide img,
 .about .about-img img {
     width: 100%;
     height: 100%;
@@ -1302,11 +1348,30 @@ section,
     fill: currentColor;
 }
 
-.about-nav-btn.prev { left: 10px; }
-.about-nav-btn.next { right: 10px; }
+.about-nav-btn.prev {
+    left: 10px;
+}
+
+.about-nav-btn.next {
+    right: 10px;
+}
 
 .about-nav-btn:hover {
     transform: translateY(-50%) scale(1.3);
+}
+
+@media (max-width:1350px) {
+    .about .our-story {
+        margin-left: 5% ;
+    }
+}
+
+@media (max-width:1250px) {
+    .about .our-story {
+        margin-left: 5% ;
+    }
+    .about-slide {
+    margin-right: 5%;}
 }
 
 @media (min-width: 991px) {
@@ -1314,9 +1379,11 @@ section,
         max-width: 65%;
         margin: 0 0 80px 0;
     }
+
     .about .our-story {
         padding-right: 35%;
     }
+
     .about .about-img {
         position: absolute;
         top: 0;
@@ -1324,7 +1391,16 @@ section,
         min-height: 600px;
     }
 }
-
+@media (max-width:991px) {
+    
+    .about-slide {
+    margin-right: 1%;
+    width:100%;
+}
+    .about .our-story {
+        margin-left: 0 ;
+    }
+}
 @media screen and (max-width: 768px) {
     section#cnc-machines.about {
         padding: 40px 0;
@@ -1368,6 +1444,7 @@ section,
         text-align: justify;
     }
 }
+
 @media screen and (max-width: 768px) {
     .about .about-img.col-lg-7 {
         display: flex;
@@ -1382,7 +1459,7 @@ section,
     }
 
     .about-slider-container {
-        width: 516px; 
+        width: 516px;
         height: 350px;
         margin: 0;
         flex: none;
@@ -1401,6 +1478,7 @@ section,
         height: 100%;
     }
 }
+
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
@@ -1566,7 +1644,7 @@ section,
     padding-top: 0;
 }
 
-.contact .mb{
+.contact .mb {
     margin-bottom: 5%;
 }
 
@@ -1678,6 +1756,6 @@ section,
 
 /* --- 產品介紹頁專屬樣式 --- */
 
-#newscon{
+#newscon {
     min-height: 2000px;
 }

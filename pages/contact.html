@@ -127,7 +127,7 @@
                     <div class="col-lg-8">
                         <form class="custom-form" id="contact-form"
                             action="https://docs.google.com/forms/d/e/1FAIpQLSdXbdMehMzlTAYnMojAdzjXEZBzNqBiISn7PY9wzQnHcKBYhw/formResponse"
-                            method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+                            method="POST" target="hidden_iframe" onsubmit="return handleFormSubmit();">
 
                             <div class="row">
                                 <div class="col-md-6 form-group">
@@ -139,6 +139,12 @@
                                         placeholder="Email" required="">
                                 </div>
                             </div>
+
+                            <div style="display:none;">
+                                <label for="honeypot">請將此欄位保持空白</label>
+                                <input type="text" name="honeypot" id="honeypot" tabindex="-1" autocomplete="off">
+                            </div>
+
                             <div class="form-group mt-3">
                                 <input type="text" class="form-control" name="entry.1945788358" id="subject"
                                     placeholder="主旨" required="">
@@ -154,8 +160,20 @@
                             onload="handleIframeLoad()"></iframe>
 
                         <script>
+                            function handleFormSubmit() {
+                                var honeypotValue = document.getElementById('honeypot').value;
+                                if (honeypotValue !== "") {
+                                    console.log("偵測到機器人攔截！");
+                                    alert('您的來信將在3個工作天內收到回覆，謝謝您的來信!');
+                                    document.getElementById('contact-form').reset();
+                                    return false;
+                                }
+
+                                submitted = true;
+                                return true;
+                            }
+
                             function handleIframeLoad() {
-                                // 檢查變數是否存在且為 true
                                 if (typeof submitted !== 'undefined' && submitted) {
                                     alert('您的來信將在3個工作天內收到回覆，謝謝您的來信!');
                                     document.getElementById('contact-form').reset();
@@ -164,7 +182,6 @@
                             }
                         </script>
                     </div>
-
                 </div>
 
             </div>
