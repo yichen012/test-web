@@ -124,33 +124,39 @@ window.addEventListener('resize', () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. 調整輪播參數
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. 取得所有需要加載的容器 ID
+    const containers = Array.from(document.querySelectorAll('.three-canvas-container'));
+    
+    if (containers.length > 0) {
+        // 2. 先加載第一個（確保使用者最快看到首屏）
+        const firstId = containers[0].id;
+        await initThreeScene(firstId); 
+
+        // 3. 重點：依序「偷偷」加載剩下的模型
+        // 這樣在你還在看第一張圖時，第二、三張已經在背景排隊下載了
+        for (let i = 1; i < containers.length; i++) {
+            const containerId = containers[i].id;
+            if (!activeScenes[containerId]) {
+                // 給一點小延遲，避免跟第一張搶頻寬
+                setTimeout(() => {
+                    initThreeScene(containerId);
+                }, i * 1500); // 每隔 1.5 秒載一個
+            }
+        }
+    }
+
+    // 4. 輪播設定與 Resize 邏輯維持不變
     const myCarouselElement = document.getElementById('hero-carousel');
     if (myCarouselElement) {
         const carousel = new bootstrap.Carousel(myCarouselElement, {
             interval: 10000,
             pause: 'hover',
-            ride: 'carousel'
+            ride: 'carousel',
+            touch: false 
         });
-    }
-
-    // 2. 初始化第一個模型
-    const firstItem = document.querySelector('.carousel-item.active .three-canvas-container');
-    if (firstItem) {
-        initThreeScene(firstItem.id);
-    }
-
-    // 3. 處理滑動載入邏輯
-    if (myCarouselElement) {
-        myCarouselElement.addEventListener('slide.bs.carousel', function (e) {
-            const nextContainer = e.relatedTarget.querySelector('.three-canvas-container');
-            if (nextContainer && !activeScenes[nextContainer.id]) {
-                initThreeScene(nextContainer.id);
-            }
-        });
-
-        myCarouselElement.addEventListener('slid.bs.carousel', function () {
+        new bootstrap.Carousel(myCarouselElement, { interval: 10000 });
+        myCarouselElement.addEventListener('slid.bs.carousel', () => {
             window.dispatchEvent(new Event('resize'));
         });
     }

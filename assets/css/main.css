@@ -1161,8 +1161,8 @@ section,
     border-radius: 50px;
     color: #adadad;
     transition: 0.3s;
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1173,6 +1173,13 @@ section,
 .hero .carousel-control-next {
     transition: 0.3s;
     opacity: 0.5;
+    width: 70px;
+    height: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    margin: 0 10px;
+    opacity: 0.8;
 }
 
 .hero .carousel-control-prev:focus,
