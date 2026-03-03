@@ -125,13 +125,20 @@ window.addEventListener('resize', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.three-canvas-container').forEach(el => {
-        initThreeScene(el.id);
-    });
+    // 1. 找出當前畫面上「第一個」要顯示的輪播項目
+    const firstItem = document.querySelector('.carousel-item.active .three-canvas-container');
+    if (firstItem) {
+        initThreeScene(firstItem.id); // 只載入這一個
+    }
 
     const myCarousel = document.getElementById('hero-carousel');
     if (myCarousel) {
-        myCarousel.addEventListener('slid.bs.carousel', function () {
+        // 2. 當使用者滑動到下一張時，才去載入那個模型
+        myCarousel.addEventListener('slid.bs.carousel', function (e) {
+            const activeContainer = e.relatedTarget.querySelector('.three-canvas-container');
+            if (activeContainer && !activeScenes[activeContainer.id]) {
+                initThreeScene(activeContainer.id); // 滑到才載入，節省記憶體
+            }
             window.dispatchEvent(new Event('resize'));
         });
     }
