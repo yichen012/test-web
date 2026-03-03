@@ -22,7 +22,7 @@ function initThreeScene(containerId) {
 
     let width = container.clientWidth || window.innerWidth;
     let height = container.clientHeight || 500;
-    
+
     // 根據螢幕寬度決定相機深度，解決模型視覺上太大的問題
     const isMobileDevice = window.innerWidth <= 768;
     const isSmallDevice = window.innerWidth <= 375;
@@ -34,7 +34,7 @@ function initThreeScene(containerId) {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // 優化效能
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
@@ -125,20 +125,32 @@ window.addEventListener('resize', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. 找出當前畫面上「第一個」要顯示的輪播項目
-    const firstItem = document.querySelector('.carousel-item.active .three-canvas-container');
-    if (firstItem) {
-        initThreeScene(firstItem.id); // 只載入這一個
+    // 1. 調整輪播參數
+    const myCarouselElement = document.getElementById('hero-carousel');
+    if (myCarouselElement) {
+        const carousel = new bootstrap.Carousel(myCarouselElement, {
+            interval: 10000,
+            pause: 'hover',
+            ride: 'carousel'
+        });
     }
 
-    const myCarousel = document.getElementById('hero-carousel');
-    if (myCarousel) {
-        // 2. 當使用者滑動到下一張時，才去載入那個模型
-        myCarousel.addEventListener('slid.bs.carousel', function (e) {
-            const activeContainer = e.relatedTarget.querySelector('.three-canvas-container');
-            if (activeContainer && !activeScenes[activeContainer.id]) {
-                initThreeScene(activeContainer.id); // 滑到才載入，節省記憶體
+    // 2. 初始化第一個模型
+    const firstItem = document.querySelector('.carousel-item.active .three-canvas-container');
+    if (firstItem) {
+        initThreeScene(firstItem.id);
+    }
+
+    // 3. 處理滑動載入邏輯
+    if (myCarouselElement) {
+        myCarouselElement.addEventListener('slide.bs.carousel', function (e) {
+            const nextContainer = e.relatedTarget.querySelector('.three-canvas-container');
+            if (nextContainer && !activeScenes[nextContainer.id]) {
+                initThreeScene(nextContainer.id);
             }
+        });
+
+        myCarouselElement.addEventListener('slid.bs.carousel', function () {
             window.dispatchEvent(new Event('resize'));
         });
     }
