@@ -13,6 +13,18 @@ THREE.DefaultLoadingManager.onLoad = function () {
 
 const activeScenes = {};
 
+// --- 關鍵修正 1：將 animate 搬到外面，讓全域都能呼叫 ---
+function animate(containerId) {
+    const sceneData = activeScenes[containerId];
+    if (!sceneData) return;
+
+    // 確保動畫持續運行
+    sceneData.animationId = requestAnimationFrame(() => animate(containerId));
+
+    sceneData.controls.update();
+    sceneData.renderer.render(sceneData.scene, sceneData.camera);
+}
+
 function initThreeScene(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -23,26 +35,22 @@ function initThreeScene(containerId) {
     let width = container.clientWidth || window.innerWidth;
     let height = container.clientHeight || 500;
 
-    // 根據螢幕寬度決定相機深度，解決模型視覺上太大的問題
     const isMobileDevice = window.innerWidth <= 768;
     const isSmallDevice = window.innerWidth <= 375;
     const cameraZ = isSmallDevice ? -7 : (isMobileDevice ? -5.5 : -4);
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    // 應用動態計算的 cameraZ
     camera.position.set(-1.4, 0, cameraZ);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     container.appendChild(renderer.domElement);
 
-    // 環境貼圖處理
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     pmremGenerator.compileEquirectangularShader();
 
@@ -51,27 +59,28 @@ function initThreeScene(containerId) {
         scene.environment = envMap;
         texture.dispose();
         pmremGenerator.dispose();
-    }, undefined, function (error) {
-        console.error('環境貼圖載入失敗：', error);
     });
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
 
-    // --- 配置 Draco 解碼器 ---
     const dracoLoader = new DRACOLoader();
-    // 使用 Google 託管的解碼器組件，省去自己放檔案的麻煩
     dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
     const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader); // 核心：設定解壓縮工具
+    loader.setDRACOLoader(dracoLoader);
 
     loader.load(modelPath, (gltf) => {
         const model = gltf.scene;
 
         model.traverse((child) => {
             if (child.isMesh) {
+                child.geometry.computeVertexNormals();
+                child.material.flatShading = false;
+                if (child.material.envMap) {
+                    child.material.needsUpdate = true;
+                }
                 child.material.envMap = scene.environment;
                 if (child.material.roughness < 0.18) {
                     child.material.roughness = 0.18;
@@ -80,33 +89,18 @@ function initThreeScene(containerId) {
             }
         });
 
-        // 模型置中處理
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
         model.position.sub(center);
 
-        // 響應式縮放邏輯
-        let responsiveScale;
-        if (isSmallDevice) {
-            responsiveScale = 2.2; // iPhone SE
-        } else if (isMobileDevice) {
-            responsiveScale = 2.8; // 一般手機
-        } else {
-            responsiveScale = 3.8; // 桌機
-        }
-
+        let responsiveScale = isSmallDevice ? 2.2 : (isMobileDevice ? 2.8 : 3.8);
         model.scale.set(responsiveScale, responsiveScale, responsiveScale);
         scene.add(model);
 
+        // --- 關鍵修正 2：存入全域物件並立即啟動動畫 ---
         activeScenes[containerId] = { scene, camera, renderer, controls };
+        animate(containerId);
     });
-
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    }
-    animate();
 }
 
 // 監聽視窗縮放
@@ -126,35 +120,42 @@ window.addEventListener('resize', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const myCarouselElement = document.getElementById('hero-carousel');
-    
-    // 1. 輪播設定 (方案一：禁用觸控滑動 + 加長間隔)
+
     if (myCarouselElement) {
         new bootstrap.Carousel(myCarouselElement, {
             interval: 10000,
             pause: 'hover',
             ride: 'carousel',
-            touch: false // 禁用手機滑動切換，避免操作 3D 時誤觸
+            touch: false
         });
     }
 
-    // 2. 只加載當前看到的第一個模型
     const firstItem = document.querySelector('.carousel-item.active .three-canvas-container');
     if (firstItem) {
         initThreeScene(firstItem.id);
     }
 
-    // 3. 只有在切換分頁時，才去下載下一個模型
     if (myCarouselElement) {
         myCarouselElement.addEventListener('slide.bs.carousel', function (e) {
+            // 停止所有動畫節省效能
+            Object.keys(activeScenes).forEach(id => {
+                if (activeScenes[id].animationId) {
+                    cancelAnimationFrame(activeScenes[id].animationId);
+                }
+            });
+
             const nextContainer = e.relatedTarget.querySelector('.three-canvas-container');
-            // 如果還沒載過，這時才開始載入
             if (nextContainer && !activeScenes[nextContainer.id]) {
                 initThreeScene(nextContainer.id);
             }
         });
 
-        // 切換完畢後重新調整大小
-        myCarouselElement.addEventListener('slid.bs.carousel', function () {
+        myCarouselElement.addEventListener('slid.bs.carousel', function (e) {
+            const activeContainer = e.relatedTarget.querySelector('.three-canvas-container');
+            // 現在 animate 是全域的，這裡可以正確執行
+            if (activeContainer && activeScenes[activeContainer.id]) {
+                animate(activeContainer.id);
+            }
             window.dispatchEvent(new Event('resize'));
         });
     }
