@@ -109,6 +109,20 @@
     transform: scale(1.02) translateY(-10px);
 }
 
+#cards {
+    /* 確保初始沒有 transform */
+    transform: translateX(0);
+}
+
+.slide-next-anim {
+    transition: transform 0.4s ease;
+    transform: translateX(-22rem);
+}
+
+.no-transition {
+    transition: none !important;
+}
+
 /* --- 卡片內部文字 --- */
 .card-intro {
     position: absolute;
@@ -498,12 +512,35 @@
   width: 90%;
   display: flex;
   overflow-x: auto;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  position: relative;
 }
 
 .spon-carousel::-webkit-scrollbar {
   display: none;
+}
+
+.spon-carousel::before,
+.spon-carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%; /* 對應您原本 15% 的淡出範圍 */
+  height: 100%;
+  z-index: 2; /* 確保蓋在圖片上面 */
+  pointer-events: none; /* 讓滑鼠點擊可以穿透，不影響操作 */
+}
+
+/* 左側蓋板：從背景色漸層到透明 */
+.spon-carousel::before {
+  left: 0;
+  /* 如果您的網頁背景不是白色，請把下面 white 換成您的背景色或 var(--background-color) */
+  background: linear-gradient(to right, white, transparent); 
+}
+
+/* 右側蓋板：從背景色漸層到透明 */
+.spon-carousel::after {
+  right: 0;
+  background: linear-gradient(to left, white, transparent);
 }
 
 .group {

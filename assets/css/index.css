@@ -559,13 +559,12 @@
 }
 
 .wave-item {
-    background: url("../img/m-powder.svg") repeat-x;
+    background: url("../img/m-powder2.svg") repeat-x;
     position: absolute;
     width: 6400px;
     height: 100%;
     background-position: bottom center;
     background-size: 1600px 100%;
-    filter: grayscale(100%) brightness(0.8) contrast(1.1);
     mix-blend-mode: multiply;
     opacity: 0.8;
 }

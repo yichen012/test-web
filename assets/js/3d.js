@@ -11,77 +11,122 @@ THREE.DefaultLoadingManager.onLoad = function () {
     }
 };
 
-const activeScenes = {};
+// --- 優化核心：全域共用單一的 Renderer、Scene、Camera ---
+let globalRenderer, globalScene, globalCamera, globalControls;
+let currentModel = null;
+let animationId = null;
+let currentContainer = null;
 
-// --- 關鍵修正 1：將 animate 搬到外面，讓全域都能呼叫 ---
-function animate(containerId) {
-    const sceneData = activeScenes[containerId];
-    if (!sceneData) return;
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+const gltfLoader = new GLTFLoader();
+gltfLoader.setDRACOLoader(dracoLoader);
 
-    // 確保動畫持續運行
-    sceneData.animationId = requestAnimationFrame(() => animate(containerId));
+// 初始化全域的 3D 環境 (只執行一次)
+function initGlobalThree() {
+    if (globalRenderer) return;
 
-    sceneData.controls.update();
-    sceneData.renderer.render(sceneData.scene, sceneData.camera);
-}
+    globalScene = new THREE.Scene();
+    
+    // 預設給個尺寸，後面 resize 會更新
+    globalCamera = new THREE.PerspectiveCamera(45, window.innerWidth / 500, 0.1, 1000);
+    
+    globalRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // 降級處理：強制設為 1，大幅減輕低階電腦負擔
+    globalRenderer.setPixelRatio(1); 
+    globalRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+    globalRenderer.toneMappingExposure = 1.2;
+    globalRenderer.outputColorSpace = THREE.SRGBColorSpace;
 
-function initThreeScene(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    const modelPath = container.getAttribute('data-model');
-    const scene = new THREE.Scene();
-
-    let width = container.clientWidth || window.innerWidth;
-    let height = container.clientHeight || 500;
-
-    const isMobileDevice = window.innerWidth <= 768;
-    const isSmallDevice = window.innerWidth <= 375;
-    const cameraZ = isSmallDevice ? -7 : (isMobileDevice ? -5.5 : -4);
-
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(-1.4, 0, cameraZ);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-    container.appendChild(renderer.domElement);
-
-    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    const pmremGenerator = new THREE.PMREMGenerator(globalRenderer);
     pmremGenerator.compileEquirectangularShader();
 
     new EXRLoader().load('assets/img/3d-model/DayEnvironmentHDRI025_1K_HDR.exr', (texture) => {
         const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-        scene.environment = envMap;
+        globalScene.environment = envMap;
         texture.dispose();
         pmremGenerator.dispose();
     });
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+    globalControls = new OrbitControls(globalCamera, globalRenderer.domElement);
+    globalControls.enableDamping = true;
+    globalControls.dampingFactor = 0.05;
+}
 
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+// 核心動畫迴圈
+function animate() {
+    if (!currentContainer) return;
+    animationId = requestAnimationFrame(animate);
+    globalControls.update();
+    globalRenderer.render(globalScene, globalCamera);
+}
 
-    const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
+// 載入模型並掛載到指定容器
+function loadModelToContainer(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    loader.load(modelPath, (gltf) => {
-        const model = gltf.scene;
+    // 1. 初始化環境
+    initGlobalThree();
+    currentContainer = container;
 
-        model.traverse((child) => {
+    // 2. 停止舊的動畫迴圈
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+    }
+
+    // 3. 移除舊模型，釋放記憶體
+    if (currentModel) {
+        globalScene.remove(currentModel);
+        currentModel.traverse((child) => {
+            if (child.isMesh) {
+                child.geometry.dispose();
+                if (child.material) {
+                    if(Array.isArray(child.material)){
+                        child.material.forEach(m => m.dispose());
+                    } else {
+                        child.material.dispose();
+                    }
+                }
+            }
+        });
+        currentModel = null;
+    }
+
+    // 4. 設定新的尺寸與相機位置
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || 500;
+    const isMobileDevice = window.innerWidth <= 768;
+    const isSmallDevice = window.innerWidth <= 375;
+    const cameraZ = isSmallDevice ? -7 : (isMobileDevice ? -5.5 : -4);
+
+    globalCamera.aspect = width / height;
+    globalCamera.position.set(-1.4, 0, cameraZ);
+    globalCamera.updateProjectionMatrix();
+    globalRenderer.setSize(width, height);
+
+    // --- 🌟 關鍵修正：防閃爍處理 ---
+    // 先把畫布變透明，並加上 CSS 漸變動畫
+    globalRenderer.domElement.style.transition = 'opacity 0.4s ease-in-out';
+    globalRenderer.domElement.style.opacity = '0'; 
+    
+    // 將畫布搬到新的容器中
+    container.appendChild(globalRenderer.domElement);
+
+    // 強制渲染一幀「沒有模型」的空場景，徹底洗掉舊殘影
+    globalRenderer.render(globalScene, globalCamera);
+    // -----------------------------
+
+    // 6. 載入新模型
+    const modelPath = container.getAttribute('data-model');
+    gltfLoader.load(modelPath, (gltf) => {
+        currentModel = gltf.scene;
+
+        currentModel.traverse((child) => {
             if (child.isMesh) {
                 child.geometry.computeVertexNormals();
                 child.material.flatShading = false;
-                if (child.material.envMap) {
-                    child.material.needsUpdate = true;
-                }
-                child.material.envMap = scene.environment;
+                child.material.envMap = globalScene.environment;
                 if (child.material.roughness < 0.18) {
                     child.material.roughness = 0.18;
                 }
@@ -89,17 +134,24 @@ function initThreeScene(containerId) {
             }
         });
 
-        const box = new THREE.Box3().setFromObject(model);
+        const box = new THREE.Box3().setFromObject(currentModel);
         const center = box.getCenter(new THREE.Vector3());
-        model.position.sub(center);
+        currentModel.position.sub(center);
 
         let responsiveScale = isSmallDevice ? 2.2 : (isMobileDevice ? 2.8 : 3.8);
-        model.scale.set(responsiveScale, responsiveScale, responsiveScale);
-        scene.add(model);
+        currentModel.scale.set(responsiveScale, responsiveScale, responsiveScale);
+        
+        globalScene.add(currentModel);
 
-        // --- 關鍵修正 2：存入全域物件並立即啟動動畫 ---
-        activeScenes[containerId] = { scene, camera, renderer, controls };
-        animate(containerId);
+        // --- 🌟 關鍵修正：模型載入完畢後淡入顯示 ---
+        // 稍微延遲一下確保畫面已經畫上去，再把透明度改回 1
+        requestAnimationFrame(() => {
+            globalRenderer.domElement.style.opacity = '1';
+        });
+        // -----------------------------
+
+        // 7. 啟動動畫
+        animate();
     });
 }
 
@@ -107,14 +159,12 @@ function initThreeScene(containerId) {
 window.addEventListener('resize', () => {
     clearTimeout(window.resizeTimer);
     window.resizeTimer = setTimeout(() => {
-        const activeContainer = document.querySelector('.carousel-item.active .three-canvas-container');
-        if (activeContainer && activeScenes[activeContainer.id]) {
-            const item = activeScenes[activeContainer.id];
-            const w = activeContainer.clientWidth;
-            const h = activeContainer.clientHeight;
-            item.camera.aspect = w / h;
-            item.camera.updateProjectionMatrix();
-            item.renderer.setSize(w, h);
+        if (currentContainer && globalRenderer && globalCamera) {
+            const w = currentContainer.clientWidth;
+            const h = currentContainer.clientHeight;
+            globalCamera.aspect = w / h;
+            globalCamera.updateProjectionMatrix();
+            globalRenderer.setSize(w, h);
         }
     }, 250);
 });
@@ -133,31 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const firstItem = document.querySelector('.carousel-item.active .three-canvas-container');
     if (firstItem) {
-        initThreeScene(firstItem.id);
+        loadModelToContainer(firstItem.id);
     }
 
     if (myCarouselElement) {
-        myCarouselElement.addEventListener('slide.bs.carousel', function (e) {
-            // 停止所有動畫節省效能
-            Object.keys(activeScenes).forEach(id => {
-                if (activeScenes[id].animationId) {
-                    cancelAnimationFrame(activeScenes[id].animationId);
-                }
-            });
-
-            const nextContainer = e.relatedTarget.querySelector('.three-canvas-container');
-            if (nextContainer && !activeScenes[nextContainer.id]) {
-                initThreeScene(nextContainer.id);
-            }
-        });
-
+        // 使用 slid 事件 (滑動結束後) 再載入新模型，避免切換過程卡頓
         myCarouselElement.addEventListener('slid.bs.carousel', function (e) {
-            const activeContainer = e.relatedTarget.querySelector('.three-canvas-container');
-            // 現在 animate 是全域的，這裡可以正確執行
-            if (activeContainer && activeScenes[activeContainer.id]) {
-                animate(activeContainer.id);
+            const nextContainer = e.relatedTarget.querySelector('.three-canvas-container');
+            if (nextContainer) {
+                loadModelToContainer(nextContainer.id);
             }
-            window.dispatchEvent(new Event('resize'));
         });
     }
 });

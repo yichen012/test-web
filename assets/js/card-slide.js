@@ -5,19 +5,53 @@ $(document).ready(function() {
     const $menu = $('#card-menu');
 
     let startX, isDown = false;
+    let isAnimating = false;
 
-    // --- 核心：搬運邏輯 ---
+    // 定義每次滑動的距離 (需與您 CSS 中 .card-list 的寬度+margin 相符)
+    const slideDistance = '-22rem'; 
+
     function moveNext() {
-        $cardList.stop().animate({ marginLeft: '-22rem' }, 400, function() {
-            $cardList.append($cardList.find('.card-list:first'));
-            $cardList.css('margin-left', '0');
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // 1. 開啟過渡動畫，並往左滑動
+        $cardList.css({
+            'transition': 'transform 0.4s ease-in-out',
+            'transform': `translateX(${slideDistance})`
         });
+
+        // 2. 等動畫結束後 (400ms)，「偷偷」把第一個搬到最後面並瞬間歸位
+        setTimeout(() => {
+            // 關閉動畫，這樣歸位時才不會有回彈的殘影
+            $cardList.css('transition', 'none'); 
+            $cardList.append($cardList.find('.card-list:first')); 
+            $cardList.css('transform', 'translateX(0)'); 
+            
+            isAnimating = false;
+        }, 400); // 這裡的時間必須與上面 transition 的 0.4s 一致
     }
 
     function movePrev() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // 1. 關閉動畫，先「偷偷」把最後一個搬到最前面，並讓整個容器往左移
+        $cardList.css('transition', 'none');
         $cardList.prepend($cardList.find('.card-list:last'));
-        $cardList.css('margin-left', '-22rem');
-        $cardList.stop().animate({ marginLeft: '0' }, 400);
+        $cardList.css('transform', `translateX(${slideDistance})`);
+
+        // 2. 強制瀏覽器重繪 (Reflow)！這行是防止生硬閃爍的超級關鍵
+        $cardList[0].offsetHeight; 
+
+        // 3. 開啟過渡動畫，並滑順地推回原位 (0)
+        $cardList.css({
+            'transition': 'transform 0.4s ease-in-out',
+            'transform': 'translateX(0)'
+        });
+
+        setTimeout(() => {
+            isAnimating = false;
+        }, 400);
     }
 
     // --- 1. 按鈕點擊 ---
@@ -44,13 +78,10 @@ $(document).ready(function() {
         else if (distance < -50) movePrev();
     });
 
-    // 避免拖曳時選取到文字或圖片
     $menu.on('mousemove touchmove', function(e) {
         if (isDown) e.preventDefault(); 
     });
 });
-
-
 
 //--------------------about------------//
 $(document).ready(function() {
