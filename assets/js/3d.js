@@ -105,17 +105,18 @@ function initThreeScene(containerId) {
 
 // 監聽視窗縮放
 window.addEventListener('resize', () => {
-    Object.keys(activeScenes).forEach(id => {
-        const item = activeScenes[id];
-        const container = document.getElementById(id);
-        if (container && item) {
-            const w = container.clientWidth;
-            const h = container.clientHeight;
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(() => {
+        const activeContainer = document.querySelector('.carousel-item.active .three-canvas-container');
+        if (activeContainer && activeScenes[activeContainer.id]) {
+            const item = activeScenes[activeContainer.id];
+            const w = activeContainer.clientWidth;
+            const h = activeContainer.clientHeight;
             item.camera.aspect = w / h;
             item.camera.updateProjectionMatrix();
             item.renderer.setSize(w, h);
         }
-    });
+    }, 250);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
