@@ -743,7 +743,8 @@
     position: absolute;
     width: 300px;
     bottom: 30px;
-    left: -300px;
+    left: 0; 
+    will-change: transform;
     z-index: 5;
     transform: rotateX(-5deg) translateZ(50px);
 }

@@ -25,12 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
             let progress = -rect.top / (rect.height - windowHeight);
             progress = Math.max(0, Math.min(1, progress));
 
-            /* ---------- 車子（不分裝置） ---------- */
-            const carStart = -20;
+            /* ---------- 車子（極致 GPU 加速版） ---------- */
+            const carStart = 10;
             const carEnd = 80;
-            const carLeft = carStart + progress * (carEnd - carStart);
-            // 改用 transform 效能更好，但為了不大幅改動您的 CSS，先維持 left
-            car.style.left = `calc(${carLeft}% - 150px)`; 
+            const carLeftPercent = carStart + progress * (carEnd - carStart);
+            
+            // 利用已知的 track 寬度 (rect.width) 算出實際像素位置
+            const currentX = (rect.width * (carLeftPercent / 100)) - 150;
+
+            // 強制開啟硬體加速，不拖累 CPU
+            car.style.transform = `translate3d(${currentX}px, 0, 0)`; 
 
             /* ---------- 文字邏輯分流 ---------- */
             const isMobile = window.innerWidth <= 430;
@@ -64,10 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ticking = false; // 允許下一次的 scroll 事件觸發更新
     }
 
+    // 監聽滾動，使用 passive 提升流暢度
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(updateCartAnimation);
             ticking = true;
         }
-    }, { passive: true }); // passive: true 告訴瀏覽器這個 listener 不會阻止滾動，提升滑動流暢度
+    }, { passive: true }); 
 });

@@ -7,43 +7,36 @@ $(document).ready(function() {
     let startX, isDown = false;
     let isAnimating = false;
 
-    // 定義每次滑動的距離 (需與您 CSS 中 .card-list 的寬度+margin 相符)
     const slideDistance = '-22rem'; 
 
     function moveNext() {
         if (isAnimating) return;
         isAnimating = true;
 
-        // 1. 開啟過渡動畫，並往左滑動
         $cardList.css({
             'transition': 'transform 0.4s ease-in-out',
             'transform': `translateX(${slideDistance})`
         });
 
-        // 2. 等動畫結束後 (400ms)，「偷偷」把第一個搬到最後面並瞬間歸位
         setTimeout(() => {
-            // 關閉動畫，這樣歸位時才不會有回彈的殘影
             $cardList.css('transition', 'none'); 
             $cardList.append($cardList.find('.card-list:first')); 
             $cardList.css('transform', 'translateX(0)'); 
             
             isAnimating = false;
-        }, 400); // 這裡的時間必須與上面 transition 的 0.4s 一致
+        }, 400); // 必須與上面 transition 的 0.4s 一致
     }
 
     function movePrev() {
         if (isAnimating) return;
         isAnimating = true;
 
-        // 1. 關閉動畫，先「偷偷」把最後一個搬到最前面，並讓整個容器往左移
         $cardList.css('transition', 'none');
         $cardList.prepend($cardList.find('.card-list:last'));
         $cardList.css('transform', `translateX(${slideDistance})`);
 
-        // 2. 強制瀏覽器重繪 (Reflow)！這行是防止生硬閃爍的超級關鍵
         $cardList[0].offsetHeight; 
 
-        // 3. 開啟過渡動畫，並滑順地推回原位 (0)
         $cardList.css({
             'transition': 'transform 0.4s ease-in-out',
             'transform': 'translateX(0)'
@@ -54,11 +47,9 @@ $(document).ready(function() {
         }, 400);
     }
 
-    // --- 1. 按鈕點擊 ---
     $nextBtn.on('click', moveNext);
     $prevBtn.on('click', movePrev);
 
-    // --- 2. 拖曳偵測 (支援滑鼠與觸控) ---
     const getX = (e) => e.originalEvent.touches ? e.originalEvent.touches[0].pageX : e.pageX;
 
     $menu.on('mousedown touchstart', function(e) {
@@ -73,7 +64,6 @@ $(document).ready(function() {
         let endX = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].pageX : e.pageX;
         let distance = startX - endX;
 
-        // 判定滑動方向 (50px 為門檻)
         if (distance > 50) moveNext();
         else if (distance < -50) movePrev();
     });
@@ -96,13 +86,10 @@ $(document).ready(function() {
         const $currentSlide = $slides.filter('.active');
         const $nextSlide = $slides.eq(index);
 
-        // 1. 舊圖標記為離開中
         $currentSlide.addClass('leaving').removeClass('active');
 
-        // 2. 新圖進入
         $nextSlide.addClass('active');
 
-        // 3. 等動畫結束後清理狀態
         setTimeout(() => {
             $currentSlide.removeClass('leaving');
             isTransitioning = false;
