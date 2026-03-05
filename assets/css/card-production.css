@@ -368,9 +368,6 @@
 /* 2. 卡片本體 */
 .card-item-full {
   width: 100%;
-  /* 隨 grid 寬度填滿 */
-  border-radius: 4px;
-  /* 圖片中看起來是很細微的圓角 */
   overflow: hidden;
   display: flex;
   flex-direction: column;
