@@ -10,26 +10,27 @@ $(document).ready(function() {
     const slideDistance = '-22rem'; 
 
     function moveNext() {
-    if (isAnimating) return;
+        if (isAnimating) return;
     
-    // 獲取當前第一張卡片的寬度 + 邊距
-    const firstCard = $cardList.find('.card-list:first');
-    const moveX = firstCard.outerWidth(true); 
+        const firstCard = $cardList.find('.card-list:first');
+        const moveX = firstCard.outerWidth(true); 
 
-    isAnimating = true;
+        isAnimating = true;
+        $cardList.css('pointer-events', 'none'); // 禁止 hover 觸發
 
-    $cardList.css({
-        'transition': 'transform 0.4s ease-in-out',
-        'transform': `translateX(-${moveX}px)`
-    });
+        $cardList.css({
+            'transition': 'transform 0.4s ease-in-out',
+            'transform': `translateX(-${moveX}px)`
+        });
 
-    setTimeout(() => {
-        $cardList.css('transition', 'none'); 
-        $cardList.append(firstCard); 
-        $cardList.css('transform', 'translateX(0)'); 
-        isAnimating = false;
-    }, 400);
-}
+        setTimeout(() => {
+            $cardList.css('transition', 'none'); 
+            $cardList.append(firstCard); 
+            $cardList.css('transform', 'translateX(0)'); 
+            $cardList.css('pointer-events', 'auto'); // 恢復 hover
+            isAnimating = false;
+        }, 400);
+    }
 
     function movePrev() {
         if (isAnimating) return;
