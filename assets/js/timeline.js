@@ -12,11 +12,12 @@ mm.add({
     scrollTrigger: {
       trigger: ".process",
       // 電腦版 top top 開始，手機版 top 80% 開始
-      start: isDesktop ? "top top" : "top 80%",
+      start: isDesktop ? "top 10%" : "top 90%",
       // 電腦版固定畫面，手機版不固定
       pin: isDesktop ? true : false, 
-      end: isDesktop ? "+=1500" : "bottom 20%",
-      scrub: 1
+      end: isDesktop ? "+=1500" : "bottom 60%",
+      scrub: isDesktop ? 1 : true,
+      anticipatePin: 1
     }
   });
 

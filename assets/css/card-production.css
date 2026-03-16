@@ -130,29 +130,31 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1.5rem;
+    padding: 2rem;
     box-sizing: border-box;
     color: #ffffff;
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .card-title {
-    margin: 0 0 0rem 0;
+    position: relative;
+    margin: 0;
     font-size: 1.6rem;
     font-weight: 900;
-    margin-bottom: 10%;
-    position: absolute;
+    transition: all 0.4s ease;
 }
 .card-description {
+    opacity: 0;
     font-size: 1.1rem;
     line-height: 1.6;
-    opacity: 0;
-    transform: translateY(20px);
+    max-height: 0;
+    overflow: hidden;
     transition: all 0.4s ease;
     text-align: justify;
     word-break: break-all;
-    margin-bottom: -155px;
+    margin-top: 0px;
     white-space: normal;
+    word-break: normal;
 }
 .card-description.chi {
     font-family: "Courier New", monospace;
@@ -165,16 +167,17 @@
     padding-bottom: 1.5rem;
 }
 .card-list:hover .card-title {
-    font-size: 2rem;
-    transform: translateY(-2.1rem);
-    
+    font-size: 1.8rem;
+    transform: translateY(0);
+    margin-bottom: 0.5rem;
     color: #ff708d;
     transition: color 0.3s ease;
 }
 
 .card-list:hover .card-description {
     opacity: 1;
-    transform: translateY(-2.1rem);
+    max-height: 200px;
+    margin-top: 0.5rem;
 }
 
 .card-description:first-of-type {
@@ -226,6 +229,10 @@
 }
 
 @media (max-width: 768px) {
+    .card-intro {
+        justify-content: flex-end;
+        padding: 1rem;
+    }
     #card-menu {
         -webkit-mask-image: none;
         mask-image: none;
@@ -247,22 +254,26 @@
 
     .card-title {
         font-size: 1.3rem;
-        margin-bottom: 15%;
+        margin-bottom: 0;
     }
 
     .card-description {
         font-size: 0.95rem;
         line-height: 1.4;
-        margin-bottom: -140px;
+        display: block;
     }
-
+    .card-list:hover .card-intro {
+        background: rgba(255, 255, 255, 0.9);
+        justify-content: center;
+    }
     .card-list:hover .card-title {
         font-size: 1.6rem;
-        transform: translateY(-1.5rem);
+        transform:none;
     }
 
     .card-list:hover .card-description {
-        transform: translateY(-1.5rem);
+        transform: none;
+        max-height: 150px;
     }
 
     #card-prev, #card-next {
@@ -277,10 +288,31 @@
     }
     .card-title {
         font-size: 1.3rem;
-        margin-bottom: 25%;
+        margin-bottom: 0;
     }
     .card-description {
         font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-height: 650px) {
+    .card-list {
+        height: 16rem !important; 
+    }
+
+    .card-list:hover .card-intro {
+        padding: 1rem !important;
+        justify-content: center !important;
+    }
+
+    .card-list:hover .card-title {
+        font-size: 1.4rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .card-description {
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
     }
 }
 /*----------------生產特色--------------------------*/
