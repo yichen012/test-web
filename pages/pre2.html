@@ -1,0 +1,326 @@
+<!-- CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in this output. -->
+<!-- PALETTE NAME: Clean Corporate (Charcoal, Pink Accent, Sky Blue Accent) -->
+<!-- NARRATIVE SUMMARY: Reverted to the strictly verified April 2026 data. Removed all AI functionalities. Implemented a tabbed interface separating Dental and Orthopedic content according to user reference images. Redesigned the color scheme to feature dark charcoal text, soft pink accent lines, and sky blue highlights for tabs and borders, matching the provided screenshot style. -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金屬 3D 列印醫材動態新聞 - 2026年4月 (實證版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        body {
+            background-color: #fafafa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #404040;
+        }
+        /* Custom Color Palette based on Image 3 */
+        .text-charcoal { color: #404040; }
+        .bg-accent-pink { background-color: #f06883; }
+        .text-accent-blue { color: #62a4eb; }
+        .bg-accent-blue { background-color: #62a4eb; }
+        .border-accent-blue { border-color: #62a4eb; }
+        
+        .warning-bg {
+            background-color: #fcf8e3;
+            border-left: 4px solid #f06883; /* Adapted warning color to match theme */
+            color: #8a6d3b;
+        }
+
+        /* Tab Styles */
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            color: #9ca3af; /* gray-400 */
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            color: #62a4eb;
+            border-bottom-color: #62a4eb;
+        }
+        .tab-button:hover:not(.active) {
+            color: #6b7280;
+        }
+
+        /* Timeline Node Style */
+        .timeline-node {
+            width: 16px;
+            height: 16px;
+            background-color: #62a4eb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 12px;
+            position: relative;
+            top: 2px;
+        }
+        .timeline-line {
+            border-left: 2px solid #62a4eb;
+            padding-left: 1.5rem;
+            margin-left: 7px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section (Redesigned to light theme) -->
+    <header class="bg-white py-14 px-6 shadow-sm mb-8">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-charcoal tracking-wide" style="font-family: 'Times New Roman', Times, serif;">
+                全球與亞洲金屬 3D 列印醫材動態
+            </h1>
+            <!-- Pink Accent Line -->
+            <div class="h-1 w-24 bg-accent-pink mx-auto mb-6 rounded-full"></div>
+            
+            <p class="text-lg text-gray-600 mb-2">2026年4月 ❘ 嚴格實證版 (Verified Data Only)</p>
+            <p class="text-sm text-gray-400 max-w-2xl mx-auto">
+                本報告所有論點均附帶真實來源、發布單位與網址。對於無法查證的資訊，將依循最高分析準則標示為「無足夠可信資料」。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 pb-20">
+
+        <!-- Tab Navigation Area (Based on Image 2) -->
+        <div class="mb-10">
+            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-gray-200 pb-2">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-bold text-charcoal flex items-center gap-2">
+                        <span class="text-3xl text-accent-blue">📊</span> 核心市場量化指標與新聞 (4月最新)
+                    </h2>
+                    <p class="text-sm text-gray-500 mt-1">點擊頁籤切換牙科與骨科之高階摘要與實證量化數據。</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button id="btn-dental" class="tab-button active" onclick="switchTab('dental')">🦷 牙科市場</button>
+                    <button id="btn-ortho" class="tab-button" onclick="switchTab('ortho')">🦴 骨科市場</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== DENTAL TAB CONTENT ==================== -->
+        <div id="tab-content-dental" class="block animate-fade-in">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Dental Chart -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-center">
+                    <h4 class="font-bold text-center text-charcoal mb-4 text-lg">2026 牙科 3D 列印終端使用者市佔預測</h4>
+                    <div class="chart-container">
+                        <canvas id="dentalUserChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center mt-4">資料來源：Coherent Market Insights</p>
+                </div>
+
+                <!-- Dental News Summary -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-xl font-bold text-charcoal mb-6 flex items-center">
+                        <span class="timeline-node"></span>牙科商業與市場動態
+                    </h3>
+                    <div class="timeline-line space-y-6">
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">牙科診所 (Dental Clinics) 將佔據 55% 市場主導地位</h4>
+                            <p class="text-sm text-gray-600 mb-2 leading-relaxed">
+                                根據 Coherent Market Insights 發布的預測顯示，隨 3D 列印在假牙修復普及，預估 2026 年北美將領先全球。因大批量客製化需求，終端診所的市佔率預計高達 55%，顯示設備正從代工中心走向診所端。
+                            </p>
+                            <a href="https://www.coherentmarketinsights.com/market-insight/dental-3d-printing-devices-market-105" target="_blank" class="text-xs text-accent-blue hover:underline">🔗 來源：Coherent Market Insights (2026)</a>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">LMT Lab Day 2026：3D Systems 發表 NextDent 解決方案</h4>
+                            <p class="text-sm text-gray-600 mb-2 leading-relaxed">
+                                於芝加哥 LMT Lab Day 中，3D Systems 展出最新技術，包含 SLA 825 雙雷射系統，並發布了針對 NextDent Jetted Dentures 解決方案的三款全新齒槽基底色，展現患者美觀客製化進展。
+                            </p>
+                            <a href="https://www.3dsystems.com/blog/2026/2026-02/3d-systems-lmt-labday-2026" target="_blank" class="text-xs text-accent-blue hover:underline">🔗 來源：3D Systems 官方部落格 (2026/2)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missing Data Notice for Dental -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-xl font-bold text-charcoal mb-4 flex items-center">
+                    <span class="timeline-node"></span>牙科技術與臨床最新進展
+                </h3>
+                <div class="warning-bg p-4 rounded-md">
+                    <h4 class="font-bold mb-1">【實證資料聲明：新材料與自動化後處理設備】</h4>
+                    <p class="text-sm">經查閱 2026 年第一季及 4 月之官方資料庫，針對牙科常用的「鈷鉻合金 (CoCr)」粉末，以及針對牙科設計之突破性「自動化支撐移除」新設備，<strong>近期並無明確且可查證的特定廠商官方發布。</strong> 為遵守不推測原則，此項標示為：<strong>無足夠可信資料</strong>。</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ==================== ORTHOPEDICS TAB CONTENT ==================== -->
+        <div id="tab-content-ortho" class="hidden animate-fade-in">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Ortho News Summary -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-xl font-bold text-charcoal mb-6 flex items-center">
+                        <span class="timeline-node"></span>骨科商業與市場動態
+                    </h3>
+                    <div class="timeline-line space-y-6">
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Croom Medical 巨資擴建「骨科技術先進中心 (ACOT)」</h4>
+                            <p class="text-sm text-gray-600 mb-2 leading-relaxed">
+                                Croom Medical 宣布建立佔地 38,000 平方英尺的骨科中心。預計 2026 年底完工，將整合多材料金屬積層製造、精密 CNC 加工與真空熱處理，為骨科 OEM 廠商提供完整代工服務。
+                            </p>
+                            <a href="https://3dprint.com/324320/3d-printing-news-briefs-3-5-2026/" target="_blank" class="text-xs text-accent-blue hover:underline">🔗 來源：3DPrint.com (2026/3/5)</a>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">TCT Asia 2026：探討 3D 列印骨科植入物之臨床轉化</h4>
+                            <p class="text-sm text-gray-600 mb-2 leading-relaxed">
+                                於上海舉辦的 TCT Asia 高峰會中，上海九院與浙大附屬一院醫師發表了「3D列印客製化植入物」及「新型多孔金屬在複雜骨缺陷修復應用」之演講，顯示技術已深入亞洲頂級醫學中心。
+                            </p>
+                            <a href="https://en.tctasia.cn/asiasummit/" target="_blank" class="text-xs text-accent-blue hover:underline">🔗 來源：TCT Asia 官方網站 (2026/3)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ortho Chart -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-center">
+                    <h4 class="font-bold text-center text-charcoal mb-4 text-lg">2026 全球金屬 3D 列印材料市佔預測</h4>
+                    <div class="chart-container">
+                        <canvas id="metalShareChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center mt-4">
+                        鈦金屬 (Titanium) 因高強度與生物相容性主導市場。<br>
+                        資料來源：Fortune Business Insights
+                    </p>
+                </div>
+            </div>
+
+            <!-- Missing Data Notice for Ortho -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-xl font-bold text-charcoal mb-4 flex items-center">
+                    <span class="timeline-node"></span>骨科技術與後處理進展
+                </h3>
+                <div class="warning-bg p-4 rounded-md">
+                    <h4 class="font-bold mb-1">【實證資料聲明：新認證與 Hipping 解決方案】</h4>
+                    <p class="text-sm">經詳細檢索 2026 年 Q1 及 4 月份文獻，針對骨科用「Ti6Al4V 或 鉭金屬」的<strong>全新</strong>粉末認證，以及近期發布的具突破性「Hipping 或 表面噴砂」新設備，<strong>並無查獲明確之官方新聞稿或專利公報。</strong>為遵守不推測原則，此項標示為：<strong>無足夠可信資料</strong>。</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-[#f3f4f6] py-8 text-center text-sm border-t border-gray-200">
+        <p class="text-gray-500 mb-2">報告期數：2026年4月 (嚴格實證與分類版)</p>
+        <p class="text-gray-400">聲明：本文件內容完全基於網路可查證之真實文獻與發布，絕無捏造推測。</p>
+    </footer>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            // Update Buttons
+            document.getElementById('btn-dental').classList.remove('active');
+            document.getElementById('btn-ortho').classList.remove('active');
+            document.getElementById('btn-' + tabName).classList.add('active');
+
+            // Update Content Visibility
+            document.getElementById('tab-content-dental').style.display = 'none';
+            document.getElementById('tab-content-ortho').style.display = 'none';
+            document.getElementById('tab-content-' + tabName).style.display = 'block';
+        }
+
+        // Label wrapping for charts
+        function wrapLabel(label, maxLength = 16) {
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // Chart 1: Dental User Share Pie Chart (Dental Tab)
+        // Palette: Blue Accent & Pink Accent
+        const dentalUserCtx = document.getElementById('dentalUserChart').getContext('2d');
+        const rawUserLabels = ['牙科診所 (Dental Clinics)', '代工廠、醫院及其他機構'];
+        const userLabels = rawUserLabels.map(label => wrapLabel(label));
+
+        new Chart(dentalUserCtx, {
+            type: 'pie',
+            data: {
+                labels: userLabels,
+                datasets: [{
+                    data: [55, 45], // 55% from Coherent Market Insights
+                    backgroundColor: ['#62a4eb', '#f06883'],
+                    hoverOffset: 4,
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: commonTooltipConfig,
+                    legend: { position: 'bottom', labels: { color: '#404040' } }
+                }
+            }
+        });
+
+        // Chart 2: Metal Share Doughnut Chart (Ortho Tab)
+        // Palette: Blue Accent & Light Gray
+        const metalShareCtx = document.getElementById('metalShareChart').getContext('2d');
+        const rawMetalLabels = ['鈦金屬 (Titanium)', '鋁合金、鈷鉻及其他金屬'];
+        const metalLabels = rawMetalLabels.map(label => wrapLabel(label));
+
+        new Chart(metalShareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: metalLabels,
+                datasets: [{
+                    data: [62.93, 37.07], // 62.93% from Fortune Business Insights
+                    backgroundColor: ['#62a4eb', '#e5e7eb'],
+                    hoverOffset: 4,
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: commonTooltipConfig,
+                    legend: { position: 'bottom', labels: { color: '#404040' } }
+                },
+                cutout: '60%'
+            }
+        });
+
+        // Initialize active tab display
+        switchTab('dental');
+    </script>
+</body>
+</html>
