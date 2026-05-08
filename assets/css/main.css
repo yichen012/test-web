@@ -609,6 +609,71 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# Shop
+--------------------------------------------------------------*/
+
+.product-img-card {
+    display: block;
+    aspect-ratio: 1 / 1; /* 保持正方形 */
+    background-color: #f8f9fa;
+    border-radius: 12px; /* 圓角 */
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    margin-bottom: 15px; /* 與下方文字的距離 */
+}
+
+/* 只有圖片框在滑過時會浮起與變色 */
+.product-img-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(35, 62, 124, 0.12);
+    border-color: var(--accent-color);
+}
+
+.product-img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-img-card:hover img {
+    transform: scale(1.08); /* 圖片內的縮放效果 */
+}
+
+/* --- 下方獨立文字區域 --- */
+.product-text {
+    padding: 0 5px; /* 稍微縮排讓它對齊圖片邊緣 */
+}
+
+.product-text .p-category {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-text h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+/* 文字連結的 hover 效果（可選） */
+.product-text a {
+    text-decoration: none;
+}
+
+.product-text a:hover h3 {
+    color: var(--accent-color);
+}
+
+
+/*--------------------------------------------------------------
 # News
 --------------------------------------------------------------*/
 .news-section {
@@ -621,7 +686,6 @@ h6 {
     padding: 25px;
     border-radius: 12px;
     border: 1px solid var(--border-light);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar h4 {
@@ -649,10 +713,7 @@ h6 {
     justify-content: space-between;
     align-items: center;
     padding: 12px 15px;
-    background: #f9f9f9;
     margin-bottom: 12px;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -1710,6 +1771,7 @@ section,
 }
 
 .contact .custom-form input[type=text],
+.contact .custom-form input[type=phone],
 .contact .custom-form input[type=email],
 .contact .custom-form textarea {
     color: var(--default-color);
@@ -1721,18 +1783,21 @@ section,
 }
 
 .contact .custom-form input[type=text]:focus,
+.contact .custom-form input[type=phone]:focus,
 .contact .custom-form input[type=email]:focus,
 .contact .custom-form textarea:focus {
     border-color: var(--accent-color);
 }
 
 .contact .custom-form input[type=text]::placeholder,
+.contact .custom-form input[type=phone]::placeholder,
 .contact .custom-form input[type=email]::placeholder,
 .contact .custom-form textarea::placeholder {
     color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
 .contact .custom-form input[type=text],
+.contact .custom-form input[type=phone]
 .contact .custom-form input[type=email] {
     height: 48px;
     padding: 10px 15px;
