@@ -1797,7 +1797,7 @@ section,
 }
 
 .contact .custom-form input[type=text],
-.contact .custom-form input[type=phone]
+.contact .custom-form input[type=phone],
 .contact .custom-form input[type=email] {
     height: 48px;
     padding: 10px 15px;
