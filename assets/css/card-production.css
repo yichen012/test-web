@@ -224,7 +224,7 @@
 
 @media (max-width: 1026px) {
     .minimal-header, #cards { padding: 0 2rem; }
-    .card-list { width: 16rem; height: 16rem; }
+    .card-list { width: 16rem; height: 18rem; }
     .title-text { font-size: 1.6rem; }
     #card-prev, #card-next { display: none; }
     #card-menu {
@@ -252,6 +252,12 @@
 
     #card-menu:active {
         cursor: grabbing;
+    }
+    .card-intro {
+        padding: 1.2rem;
+    }
+    .card-list:hover .card-intro {
+        padding-bottom: 1.2rem;
     }
 }
 
