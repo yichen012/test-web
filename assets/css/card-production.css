@@ -161,9 +161,11 @@
     margin-top: 0px;
     white-space: normal;
     word-break: normal;
+    padding-bottom: 8px;
 }
 .card-description.chi {
     font-family: "Courier New", monospace;
+    padding-bottom: 0px;
 }
 
 .card-list:hover .card-intro {
@@ -225,6 +227,24 @@
     .card-list { width: 16rem; height: 16rem; }
     .title-text { font-size: 1.6rem; }
     #card-prev, #card-next { display: none; }
+    #card-menu {
+        cursor: grab;
+        touch-action: pan-y;
+    }
+
+    #card-menu:active {
+        cursor: grabbing;
+    }
+    .card-title {
+        font-size: 1.5rem; 
+    }
+    .card-list:hover .card-title {
+        font-size: 1.5rem; 
+    }
+    .card-description {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
     #card-menu {
         cursor: grab;
         touch-action: pan-y;
