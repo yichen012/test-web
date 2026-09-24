@@ -283,6 +283,10 @@
                     }
                 });
             });
+            const defaultToggle = document.querySelector('.lang-toggle:checked');
+            if(defaultToggle) {
+                defaultToggle.dispatchEvent(new Event('change'));
+            }
         });
     </script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
