@@ -1821,7 +1821,113 @@ section,
     background: color-mix(in srgb, var(--accent-color) 90%, black 15%);
 }
 
+/*--------------------------------------------------------------
+# 無框 DM 滑動與圈圈選單
+--------------------------------------------------------------*/
+.dm-section {
+    padding: 80px 0;
+}
 
+/* DM 滑動區無框設定 */
+.dm-slider-wrap {
+    position: relative;
+    width: 100%;
+    /* 從原本的 530px 放寬到 800px（甚至 100%），讓大螢幕可以顯示更大的 DM */
+    max-width: 800px; 
+    margin: 0 auto;
+    /* 左右留白稍微加大，避免變大的箭頭去撞到圖片 */
+    padding: 0 50px; 
+}
+
+/* DM 滑動區無框設定 */
+.dm-swiper {
+    width: 100%;
+    padding-bottom: 40px; /* 只保留下方的空間給分頁點 */
+}
+
+.dm-swiper .swiper-slide img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.dm-slider-wrap .swiper-button-next,
+.dm-slider-wrap .swiper-button-prev {
+    color: #999999; /* 改成灰色 */
+}
+
+.dm-slider-wrap .swiper-button-next::after,
+.dm-slider-wrap .swiper-button-prev::after {
+    font-weight: 900; /* 極粗體 */
+    -webkit-text-stroke: 2px #999999; /* 加上描邊讓線條更厚實 */
+}
+
+/* 將箭頭推到剛剛設定的 padding 邊緣 */
+.dm-slider-wrap .swiper-button-next {
+    right: 0px; 
+}
+
+.dm-slider-wrap .swiper-button-prev {
+    left: 0px; 
+}
+
+/* 語言選擇圈圈 (核心設計) */
+.lang-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    color: #666;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+/* 當圈圈被選中時的狀態 (變色) */
+.btn-check:checked + .lang-circle {
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
+    color: var(--contrast-color, #fff);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 滑鼠移過去的狀態 */
+.lang-circle:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+.btn-check:checked + .lang-circle:hover {
+    color: var(--contrast-color, #fff);
+}
+
+/* 膠囊型下載按鈕 */
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #222; /* 使用深色營造高級感 */
+    color: #fff;
+    padding: 15px 35px;
+    border-radius: 50px; /* 圓角膠囊 */
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+}
+
+.btn-download:hover {
+    background: var(--accent-color);
+    color: var(--contrast-color, #fff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
 
 
 
